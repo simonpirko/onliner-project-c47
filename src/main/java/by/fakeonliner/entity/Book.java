@@ -5,6 +5,7 @@ public class Book {
     private long id;
     private String bookName;
     private String authorName;
+    private String description;
     private String cost;
 
     public long getId() {
@@ -37,5 +38,13 @@ public class Book {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -5,6 +5,8 @@ public class Shop {
     private long id;
     private String name;
     private String email;
+    private String phoneNumber;
+    private String description;
     private String userId;
 
     public long getId() {
