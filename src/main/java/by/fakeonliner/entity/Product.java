@@ -3,7 +3,6 @@ package by.fakeonliner.entity;
 import java.util.List;
 
 abstract class Product {
-
     private long id;
     private String brand;
     private String price;
@@ -11,6 +10,6 @@ abstract class Product {
     private String marketLaunchDate;
     private double averageRating;
 
-    private List<Comment> commentList;
-    private List<Shop> shopList;
+    private List<Comment> comments;
+    private List<Shop> shops;
 }

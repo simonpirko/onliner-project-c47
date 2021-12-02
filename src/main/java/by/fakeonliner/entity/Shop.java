@@ -12,6 +12,7 @@ public class Shop {
     private String deliveryPrice;
     private String description;
     private String rating;
+    private String deliveryType;
 
-    private List<Comment> commentList;
+    private List<Comment> comments;
 }
