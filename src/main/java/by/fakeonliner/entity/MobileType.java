@@ -1,6 +1,6 @@
 package by.fakeonliner.entity;
 
 public enum MobileType {
-    MOBILE,
+    PHONES,
     TABLET;
 }
