@@ -1,43 +1,17 @@
 package by.fakeonliner.entity;
 
-public class Shop {
+import java.util.List;
 
+public class Shop {
     private long id;
     private String name;
-    private String email;
     private String phoneNumber;
+    private String contactAddress;
+    private String email;
+    private String operatingMode;
+    private String deliveryPrice;
     private String description;
-    private String userId;
+    private String rating;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    private List<Comment> commentList;
 }
