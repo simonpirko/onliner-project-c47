@@ -9,7 +9,7 @@ public class UserRepository {
 
     private final List<User> users = new ArrayList<>();
 
-    public boolean existByLogin(String userName) {
+    public boolean isExistLogin(String userName) {
         if (!users.isEmpty()) {
             for (User usr : users) {
                 if (usr.getUsername().equals(userName)) {
