@@ -2,6 +2,7 @@ package by.fakeonliner.web.servlet;
 
 import by.fakeonliner.entity.User;
 import by.fakeonliner.service.UserService;
+import by.fakeonliner.web.constant.ConstantPath;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getServletContext().getRequestDispatcher("/pages/authorization.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
         } catch (ServletException e) {
             e.printStackTrace();
         }
@@ -48,7 +49,7 @@ public class AuthorizationServlet extends HttpServlet {
         } else {
             req.setAttribute("message", "User not found");
         }
-        getServletContext().getRequestDispatcher("/pages/authorization.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
     }
 }
 
