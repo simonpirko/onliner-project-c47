@@ -10,7 +10,7 @@ public class UserService {
 
 
     public User findByUsername(String userName) {
-        if (userRepository.verificationLogin(userName)) {
+        if (userRepository.existByLogin(userName)) {
             return userRepository.getUser(userName);
         }
         return null;
@@ -19,5 +19,8 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
+
+
 
 }
