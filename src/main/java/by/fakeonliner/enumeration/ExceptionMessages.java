@@ -7,7 +7,8 @@ public enum ExceptionMessages {
     PASSWORD_IS_EMPTY("Password must be not empty."),
     PHONE_NUMBER_IS_EMPTY("Phone number must be not empty."),
     EMAIL_IS_EMPTY("Email must be not empty."),
-    USER_ALREADY_EXIST("User already exist.")
+    USER_ALREADY_EXIST("User already exist."),
+    PASSWORD_NOT_EQUALS("Passwords not equal.")
     ;
 
 

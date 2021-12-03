@@ -18,47 +18,72 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("user", new User());
         getServletContext().getRequestDispatcher("/pages/reg.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = new User();
         boolean flagMessage = false;
-        if (user == null) {
-            resp.sendRedirect("/registration");
-        }
-        if (user.getFirstName() == null) {
+
+        if (req.getParameter("firstName") == null) {
             req.getSession().setAttribute("firstNameMessage", ExceptionMessages.FIRST_NAME_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setFirstName(req.getParameter("firstName"));
         }
-        if (user.getLastName() == null) {
+
+        if (req.getParameter("lastName") == null) {
             req.getSession().setAttribute("lastNameMessage", ExceptionMessages.LAST_NAME_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setLastName(req.getParameter("lastName"));
         }
-        if (user.getUsername() == null) {
+
+        if (req.getParameter("username") == null) {
             req.getSession().setAttribute("usernameMessage", ExceptionMessages.USERNAME_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setUsername(req.getParameter("username"));
         }
-        if (user.getPassword() == null) {
+
+        if (req.getParameter("password") == null) {
             req.getSession().setAttribute("passwordMessage", ExceptionMessages.PASSWORD_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setPassword(req.getParameter("password"));
         }
-        if (user.getEmail() == null) {
+
+        if (req.getParameter("confirmPassword") == null) {
+            req.getSession().setAttribute("confirmPasswordMessage", ExceptionMessages.PASSWORD_IS_EMPTY.toString());
+            flagMessage = true;
+        }
+
+        if (req.getParameter("email") == null) {
             req.getSession().setAttribute("emailMessage", ExceptionMessages.EMAIL_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setEmail(req.getParameter("email"));
         }
-        if (user.getPhoneNumber() == null) {
+
+        if (req.getParameter("phoneNumber") == null) {
             req.getSession().setAttribute("phoneNumberMessage", ExceptionMessages.PHONE_NUMBER_IS_EMPTY.toString());
             flagMessage = true;
+        } else {
+            user.setPhoneNumber(req.getParameter("phoneNumber"));
         }
-        if (flagMessage) {
-            resp.sendRedirect("/registration");
+
+        if (!user.getPassword().equals(req.getParameter("confirmPassword"))) {
+            req.getSession().setAttribute("passwordNotEquals", ExceptionMessages.PASSWORD_NOT_EQUALS.toString());
+            flagMessage = true;
         }
 
         if (!userService.isExistUsername(user.getUsername())) {
             req.getSession().setAttribute("userMessage", ExceptionMessages.USER_ALREADY_EXIST.toString());
+            flagMessage = true;
+        }
+
+        if (flagMessage) {
             resp.sendRedirect("/registration");
         }
 
