@@ -10,7 +10,7 @@ public class UserService {
 
 
     public User findByUsername(String userName) {
-        if (userRepository.isExistLogin(userName)) {
+        if (userRepository.existByLogin(userName)) {
             return userRepository.getUser(userName);
         }
         return null;
