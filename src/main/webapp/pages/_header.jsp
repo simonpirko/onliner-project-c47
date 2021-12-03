@@ -27,7 +27,10 @@
                 <c:if test="${sessionScope.user == null}">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/registration">Registration</a>
+                        <a class="nav-link" href="/registration_user">Registration User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration_shop">Registration Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/authorization">Authorization</a>
@@ -40,9 +43,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Shop">Shop</a>
-                    </li>
+
                 </c:if>
 
             </ul>
