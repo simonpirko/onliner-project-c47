@@ -29,17 +29,17 @@
             <div class="row margin-top: 100%" >
                 <form class="d-flex" action="/search" method="post">
                     <input class="form-control me-2" type="search" placeholder="Search"
-                           style="width:300px; height: 30px" ; aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                           style="width:870px; height: 30px" ; aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                 </form>
             </div>
-            <c:if test="${sessionScope.user != null}">
+            <c:if test="${sessionScope.user == null}">
                 <a class="btn btn-outline-success" href="/shopRegistration" role="button"><i class="bi bi-shop"></i></a>
                 <a class="btn btn-outline-primary" href="/basketUserNull" role="button"><i class="bi bi-basket"></i></a>
                 <a class="btn btn-outline-info" href="/signIn" role="button"><i
                         class="bi bi-box-arrow-in-right"></i></a>
             </c:if>
-            <c:if test="${sessionScope.user == null}">
+            <c:if test="${sessionScope.user != null}">
                 <a class="nav-link">${sessionScope.user.name}</a>
                 <a class="btn btn-outline-success" href="/profile"><i class="bi bi-person-circle"></i></a>
                 <a class="btn btn-outline-primary" href="/basketUser" role="button"><i class="bi bi-basket"></i></a>
