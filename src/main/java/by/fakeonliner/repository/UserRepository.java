@@ -42,4 +42,28 @@ public class UserRepository implements UserDao{
         return null;
     }
 
+    @Override
+    public void save(User user) {
+
+    }
+
+    @Override
+    public void edit(User user) {
+
+    }
+
+    @Override
+    public void delete(User user) {
+
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return false;
+    }
+
+    @Override
+    public boolean existByPhoneNumber(String phoneNumber) {
+        return false;
+    }
 }
