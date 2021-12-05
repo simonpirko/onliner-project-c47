@@ -20,5 +20,19 @@ public class UserService {
         return userRepository.getAllUsers();
     }
 
+    public boolean existByUsername(String username) {
+        return userRepository.existByLogin(username);
+    }
 
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    public boolean existByPhoneNumber(String phoneNumber) {
+        return userRepository.existByPhoneNumber(phoneNumber);
+    }
+
+    public boolean existByEmail(String email) {
+        return userRepository.existByEmail(email);
+    }
 }
