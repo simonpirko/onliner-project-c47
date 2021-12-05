@@ -1,5 +1,6 @@
 package by.fakeonliner.repository;
 
+
 import by.fakeonliner.entity.Laptop;
 import by.fakeonliner.entity.Mobile;
 
@@ -8,8 +9,8 @@ import java.util.List;
 
 public class ProductRepository implements ProductDao{
 
-    private final LinkedList<Laptop> laptops = new LinkedList<>();
-    private final LinkedList<Mobile> mobiles = new LinkedList<>();
+    private final List<Laptop> laptops = new LinkedList<>();
+    private final List<Mobile> mobiles = new LinkedList<>();
 
     @Override
     public void save(Object object) {
