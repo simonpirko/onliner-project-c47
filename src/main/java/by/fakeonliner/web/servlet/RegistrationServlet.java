@@ -78,17 +78,17 @@ public class RegistrationServlet extends HttpServlet {
             flagMessage = true;
         }
 
-        if (!userService.isExistUsername(user.getUsername())) {
-            req.getSession().setAttribute("userMessage", ExceptionMessages.USER_ALREADY_EXIST.toString());
-            flagMessage = true;
-        }
+////        if (!userService.isExistUsername(user.getUsername())) {
+//            req.getSession().setAttribute("userMessage", ExceptionMessages.USER_ALREADY_EXIST.toString());
+//            flagMessage = true;
+//        }
 
         if (flagMessage) {
             resp.sendRedirect("/registration");
         }
 
-        userService.save(user);
-        resp.sendRedirect("/authorization");
+//        userService.save(user);
+//        resp.sendRedirect("/authorization");
     }
 
     @Override
