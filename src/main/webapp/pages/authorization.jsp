@@ -11,7 +11,7 @@
 <head>
     <title>Authorization</title>
 </head>
-<%--<jsp:include page="/pages/_header.jsp"/>--%>
+<jsp:include page="/pages/_header.jsp"/>
 <body>
 <div class="container">
     <div class="row justify-center-center">
