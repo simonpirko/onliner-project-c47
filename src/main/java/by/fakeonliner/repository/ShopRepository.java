@@ -8,9 +8,11 @@ import java.util.List;
 public class ShopRepository implements ShopDao {
 
     private final List<Shop> shops = new ArrayList<>();
+    private long id = 0;
 
     @Override
     public void save(Shop shop) {
+        shop.setId(id++);
         shops.add(shop);
     }
 

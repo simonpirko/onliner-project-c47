@@ -1,4 +1,4 @@
-package by.fakeonliner.web.servlet;
+package by.fakeonliner.web.servlet.user;
 
 import by.fakeonliner.entity.User;
 import by.fakeonliner.service.UserService;
@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/authorization")
-public class AuthorizationServlet extends HttpServlet {
+@WebServlet("/user/authorization")
+public class AuthorizationUserServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
+            getServletContext().getRequestDispatcher(ConstantPath.USER_AUTHORIZATION_JSP).forward(req, resp);
         } catch (ServletException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class AuthorizationServlet extends HttpServlet {
         } else {
             req.setAttribute("message", "User not found");
         }
-        getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
+        getServletContext().getRequestDispatcher(ConstantPath.USER_AUTHORIZATION_JSP).forward(req, resp);
     }
 }
 

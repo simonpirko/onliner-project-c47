@@ -26,4 +26,12 @@ public class Shop {
     private String deliveryType;
 
     private List<Comment> comments;
+
+    public Shop(String login, String password, String name, String phoneNumber, String email) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }
