@@ -17,7 +17,6 @@ public enum ConstantMessage {
 
     private String message;
 
-
     ConstantMessage(String message) {
         this.message = message;
     }

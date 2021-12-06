@@ -4,7 +4,8 @@ import by.fakeonliner.entity.User;
 
 import by.fakeonliner.service.UserService;
 import by.fakeonliner.web.constant.ConstantMessage;
-import by.fakeonliner.web.constant.Regex;
+import by.fakeonliner.web.constant.ConstantPath;
+import by.fakeonliner.web.validator.RegistrationValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,12 @@ import java.io.IOException;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private UserService userService;
+    private RegistrationValidator regValid;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/pages/reg.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher(ConstantPath.registrationPathJsp).forward(req, resp);
     }
 
     @Override
@@ -28,54 +30,54 @@ public class RegistrationServlet extends HttpServlet {
         User user = new User();
         boolean flagMessage = false;
 
-        if (req.getParameter("firstName") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("firstName"))) {
             req.getSession().setAttribute("firstNameMessage", ConstantMessage.FIRST_NAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setFirstName(req.getParameter("firstName"));
         }
 
-        if (req.getParameter("lastName") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("lastName"))) {
             req.getSession().setAttribute("lastNameMessage", ConstantMessage.LAST_NAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setLastName(req.getParameter("lastName"));
         }
 
-        if (req.getParameter("username") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("username"))) {
             req.getSession().setAttribute("usernameMessage", ConstantMessage.USERNAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setUsername(req.getParameter("username"));
         }
 
-        if (req.getParameter("password") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("password"))) {
             req.getSession().setAttribute("passwordMessage", ConstantMessage.PASSWORD_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setPassword(req.getParameter("password"));
         }
 
-        if (req.getParameter("confirmPassword") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("confirmPassword"))) {
             req.getSession().setAttribute("confirmPasswordMessage", ConstantMessage.PASSWORD_IS_EMPTY.toString());
             flagMessage = true;
         }
 
-        if (req.getParameter("email") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("email"))) {
             req.getSession().setAttribute("emailMessage", ConstantMessage.EMAIL_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setEmail(req.getParameter("email"));
         }
 
-        if (req.getParameter("phoneNumber") == null) {
+        if (regValid.isNullOrEmpty(req.getParameter("phoneNumber"))) {
             req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setPhoneNumber(req.getParameter("phoneNumber"));
         }
 
-        if (req.getParameter("email").matches(Regex.VALID_EMAIL_ADDRESS_REGEX)) {
+        if (regValid.isCorrectEmail(req.getParameter("email"))) {
             if (userService.existByEmail(req.getParameter("email"))) {
                 req.getSession().setAttribute("email", ConstantMessage.EMAIL_ALREADY_EXIST.toString());
                 flagMessage = true;
@@ -85,18 +87,13 @@ public class RegistrationServlet extends HttpServlet {
             flagMessage = true;
         }
 
-        if (req.getParameter("phoneNumber").matches(Regex.VALID_PHONE_NUMBER_REGEX)) {
+        if (regValid.isCorrectPhone(req.getParameter("phoneNumber"))) {
             if (userService.existByPhoneNumber(req.getParameter("phoneNumber"))) {
                 req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_ALREADY_EXIST.toString());
                 flagMessage = true;
             }
         } else {
             req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_INPUT_INCORRECTLY.toString());
-            flagMessage = true;
-        }
-
-        if (!user.getPassword().equals(req.getParameter("confirmPassword"))) {
-            req.getSession().setAttribute("passwordNotEquals", ConstantMessage.PASSWORD_NOT_EQUALS.toString());
             flagMessage = true;
         }
 
@@ -107,15 +104,15 @@ public class RegistrationServlet extends HttpServlet {
 
         if (flagMessage) {
             resp.sendRedirect("/registration");
+        } else {
+            userService.save(user);
+            resp.sendRedirect("/authorization");
         }
-
-        userService.save(user);
-        resp.sendRedirect("/authorization");
     }
-
 
     @Override
     public void init() throws ServletException {
         userService = new UserService();
+        regValid = new RegistrationValidator();
     }
 }
