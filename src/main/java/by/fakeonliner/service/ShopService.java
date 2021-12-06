@@ -1,12 +1,13 @@
 package by.fakeonliner.service;
 
 import by.fakeonliner.entity.Shop;
+import by.fakeonliner.repository.ShopDao;
 import by.fakeonliner.repository.ShopRepository;
 
 import java.util.List;
 
 public class ShopService {
-    private ShopRepository shopRepository = new ShopRepository();
+    private final ShopDao shopRepository = new ShopRepository();
 
     public Shop findByLogin(String login) {
         if (shopRepository.existByLogin(login)) {
@@ -15,7 +16,7 @@ public class ShopService {
         return null;
     }
 
-    public List getShopList() {
-        return shopRepository.getShops();
+    public List<Shop> getShopList() {
+        return shopRepository.getShopList();
     }
 }
