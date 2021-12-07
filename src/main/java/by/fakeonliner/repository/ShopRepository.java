@@ -33,4 +33,8 @@ public class ShopRepository implements ShopDao{
     public void delete(Shop shop) {
 
     }
+
+    public List<Shop> getShops() {
+        return shops;
+    }
 }
