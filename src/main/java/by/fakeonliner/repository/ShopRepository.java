@@ -34,7 +34,8 @@ public class ShopRepository implements ShopDao{
 
     }
 
-    public List<Shop> getShops() {
-        return shops;
+    @Override
+    public List<Shop> getShopList() {
+        return null;
     }
 }
