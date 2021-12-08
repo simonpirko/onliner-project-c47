@@ -33,4 +33,9 @@ public class ShopRepository implements ShopDao{
     public void delete(Shop shop) {
 
     }
+
+    @Override
+    public List<Shop> getShopList() {
+        return null;
+    }
 }
