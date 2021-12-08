@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.fakeonliner.web.constant.ConstantPath.commentAddPathJsp;
+import static by.fakeonliner.web.constant.ConstantPath.COMMENT_ADD_JSP;
 
 @WebServlet("/delete")
 public class DeleteCommentServlet extends HttpServlet {

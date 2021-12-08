@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import static by.fakeonliner.web.constant.ConstantPath.commentAddPathJsp;
+import static by.fakeonliner.web.constant.ConstantPath.COMMENT_ADD_JSP;
 
 @WebServlet("/addComment")
 public class AddCommentServlet extends HttpServlet {
@@ -34,6 +34,6 @@ public class AddCommentServlet extends HttpServlet {
         } else {
             req.setAttribute("message_comment_add", "Error");
         }
-        getServletContext().getRequestDispatcher(commentAddPathJsp);
+        getServletContext().getRequestDispatcher(COMMENT_ADD_JSP);
     }
 }
