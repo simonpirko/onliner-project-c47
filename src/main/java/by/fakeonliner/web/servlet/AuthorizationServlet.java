@@ -20,7 +20,7 @@ public class AuthorizationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
+            getServletContext().getRequestDispatcher(ConstantPath.USER_AUTHORIZATION_JSP).forward(req, resp);
         } catch (ServletException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class AuthorizationServlet extends HttpServlet {
         } else {
             req.setAttribute("message", "User not found");
         }
-        getServletContext().getRequestDispatcher(ConstantPath.authorizationPathJsp).forward(req, resp);
+        getServletContext().getRequestDispatcher(ConstantPath.USER_AUTHORIZATION_JSP).forward(req, resp);
     }
 }
 
