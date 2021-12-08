@@ -92,10 +92,10 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         if (flagMessage) {
-            resp.sendRedirect("/registration");
+            resp.sendRedirect("/user/registration");
         } else {
             userService.save(user);
-            resp.sendRedirect("/authorization");
+            resp.sendRedirect("/user/authorization");
         }
     }
 
