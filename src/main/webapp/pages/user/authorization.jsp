@@ -11,12 +11,12 @@
 <head>
     <title>Authorization</title>
 </head>
-<jsp:include page="/pages/_header.jsp"/>
 <body>
+<jsp:include page="/pages/_header.jsp"/>
 <div class="container">
     <div class="row justify-center-center">
         <div class="col-sm-3">
-            <form action="authorization" method="post">
+            <form action="/user/authorization" method="post">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">login</label>
                     <input type="text" name="username" class="form-control" id="exampleInputEmail1"

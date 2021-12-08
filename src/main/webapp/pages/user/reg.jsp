@@ -11,11 +11,11 @@
 </head>
 <body>
 
-<jsp:include page="../_header.jsp"/>
+<jsp:include page="/pages/_header.jsp"/>
 
 <div class="container-fluid">
 
-    <form action="/registration" method="post">
+    <form action="/user/registration" method="post">
 
         <div class="row justify-content-md-center">
 

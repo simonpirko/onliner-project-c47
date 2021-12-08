@@ -6,7 +6,7 @@ import by.fakeonliner.repository.UserRepository;
 import java.util.List;
 
 public class UserService {
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
 
     public User findByUsername(String userName) {

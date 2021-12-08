@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/authorization")
-public class AuthorizationServlet extends HttpServlet {
+@WebServlet("/user/authorization")
+public class AuthorizationUserServlet  extends HttpServlet {
     private final UserService userService = new UserService();
 
 

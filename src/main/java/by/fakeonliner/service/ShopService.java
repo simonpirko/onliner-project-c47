@@ -7,16 +7,24 @@ import by.fakeonliner.repository.ShopRepository;
 import java.util.List;
 
 public class ShopService {
-    private final ShopDao shopRepository = new ShopRepository();
+    private final ShopDao shopDao  = new ShopRepository();
+
+    public boolean shopDao (Shop shop) {
+        if (!shopDao.existByLogin(shop.getLogin())) {
+            shopDao.save(shop);
+            return true;
+        }
+        return false;
+    }
 
     public Shop findByLogin(String login) {
-        if (shopRepository.existByLogin(login)) {
-            return shopRepository.getShop(login);
+        if (shopDao .existByLogin(login)) {
+            return shopDao .getShop(login);
         }
         return null;
     }
 
     public List<Shop> getShopList() {
-        return shopRepository.getShopList();
+        return shopDao .getShopList();
     }
 }
