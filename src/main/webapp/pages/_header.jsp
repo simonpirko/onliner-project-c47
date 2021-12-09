@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">FakeOnliner</a>
+        <a class="navbar-brand" href="/pages/main_window.jsp">FakeOnliner</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <form class="d-flex m-2" action="/search" method="post">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -17,7 +17,7 @@
                 <a class="btn btn-outline-success" href="/shop/registration" role="button"><i class="bi bi-shop"></i></a>
             </form>
             <form class="d-flex m-2" action="/" method="post">
-                <a class="btn btn-outline-primary" href="/basketUserNull" role="button"><i class="bi bi-basket"></i></a>
+                <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
             </form>
             <form class="d-flex m-2" action="/user/authorization" method="post">
                 <a class="btn btn-outline-info" href="/user/authorization" role="button"><i
@@ -27,13 +27,13 @@
             <c:if test="${sessionScope.user != null}">
             <a class="nav-link">${sessionScope.user.name}</a>
             <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-success" href="/profile"><i class="bi bi-person-circle"></i></a>
+                <a class="btn btn-outline-success" href="/pages/user/user_profile.jsp"><i class="bi bi-person-circle"></i></a>
             </form>
             <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-primary" href="/basketUser" role="button"><i class="bi bi-basket"></i></a>
+                <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
             </form>
             <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-danger" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+                <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
                 </c:if>
             </form>
         </div>

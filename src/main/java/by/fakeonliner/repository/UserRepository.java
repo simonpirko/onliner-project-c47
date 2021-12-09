@@ -44,7 +44,7 @@ public class UserRepository implements UserDao{
 
     @Override
     public void save(User user) {
-
+        users.add(user);
     }
 
     @Override
