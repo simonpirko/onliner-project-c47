@@ -1,4 +1,4 @@
-package by.fakeonliner.web.servlet;
+package by.fakeonliner.web.servlet.user;
 
 import by.fakeonliner.entity.User;
 import by.fakeonliner.service.UserService;

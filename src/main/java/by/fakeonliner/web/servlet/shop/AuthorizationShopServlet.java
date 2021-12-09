@@ -31,7 +31,7 @@ public class AuthorizationShopServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         Shop shop = shopService.findByLogin(login);
-        verificationPassword(req, resp, login, shop);
+        verificationPassword(req, resp, password, shop);
     }
 
     private void verificationPassword(HttpServletRequest req, HttpServletResponse resp, String password, Shop shop) throws IOException, ServletException {
@@ -40,7 +40,7 @@ public class AuthorizationShopServlet extends HttpServlet {
                 List<Shop> shopList = shopService.getShopList();
                 req.getSession().setAttribute("shop", shop);
                 req.getSession().setAttribute("shopList", shopList);
-                resp.sendRedirect("/");
+                resp.sendRedirect(ConstantPath.HOME_JSP);
                 return;
             } else {
                 req.setAttribute("message", "Wrong password");

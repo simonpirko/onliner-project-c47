@@ -1,4 +1,4 @@
-package by.fakeonliner.web.servlet;
+package by.fakeonliner.web.servlet.user;
 
 import by.fakeonliner.entity.User;
 
@@ -92,10 +92,10 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         if (flagMessage) {
-            resp.sendRedirect("/registration");
+            resp.sendRedirect("/user/registration");
         } else {
             userService.save(user);
-            resp.sendRedirect("/authorization");
+            resp.sendRedirect("/user/authorization");
         }
     }
 
@@ -107,15 +107,15 @@ public class RegistrationServlet extends HttpServlet {
 
 
     private boolean isCorrectPhoneNumber(String phoneNumber, HttpServletRequest req) {
-        if (regValid.isCorrectPhone(phoneNumber)) {
-            if (userService.existByPhoneNumber(phoneNumber)) {
-                req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_ALREADY_EXIST.toString());
-                return true;
-            }
-        } else {
-            req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_INPUT_INCORRECTLY.toString());
-            return true;
-        }
+//        if (regValid.isCorrectPhone(phoneNumber)) {
+//            if (userService.existByPhoneNumber(phoneNumber)) {
+//                req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_ALREADY_EXIST.toString());
+//                return true;
+//            }
+//        } else {
+//            req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_INPUT_INCORRECTLY.toString());
+//            return true;
+//        }
         return false;
     }
 
