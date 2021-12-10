@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/pages/main_window.jsp">FakeOnliner</a>
+        <a class="navbar-brand" href="/pages/home.jsp">FakeOnliner</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <form class="d-flex m-2" action="/search" method="post">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">

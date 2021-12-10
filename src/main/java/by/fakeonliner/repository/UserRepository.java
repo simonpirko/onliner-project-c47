@@ -5,17 +5,15 @@ import by.fakeonliner.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements UserDao{
+public class UserRepository implements UserDao {
 
-    private final List<User> users = new ArrayList<>();
+    private final static List<User> users = new ArrayList<>();
 
     @Override
     public boolean existByLogin(String userName) {
-        if (!users.isEmpty()) {
-            for (User usr : users) {
-                if (usr.getUsername().equals(userName)) {
-                    return true;
-                }
+        for (User usr : users) {
+            if (usr.getUsername().equals(userName)) {
+                return true;
             }
         }
         return false;
@@ -23,23 +21,17 @@ public class UserRepository implements UserDao{
 
     @Override
     public User getUser(String userName) {
-        if (!users.isEmpty()) {
-            for (User usr : users) {
-                if (usr.getUsername().equals(userName)) {
-                    return usr;
-                }
+        for (User usr : users) {
+            if (usr.getUsername().equals(userName)) {
+                return usr;
             }
         }
         return null;
-
     }
 
     @Override
-    public List<User> getAllUsers(){
-        if (!users.isEmpty()){
-            return users;
-        }
-        return null;
+    public List<User> getAllUsers() {
+        return users;
     }
 
     @Override

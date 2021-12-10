@@ -32,7 +32,7 @@ public class RegistrationShopServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String email = req.getParameter("email");
 
-        if (!shopService.shopDao(new Shop(login, password, name, phoneNumber, email))) {
+        if (!shopService.save(new Shop(login, password, name, phoneNumber, email))) {
             req.setAttribute("alert", "This login exists");
             getServletContext().getRequestDispatcher(ConstantPath.SHOP_REGISTRATION_JSP).forward(req, resp);
         } else {
