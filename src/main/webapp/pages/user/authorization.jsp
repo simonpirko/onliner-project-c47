@@ -27,6 +27,7 @@
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <a class="btn btn-primary" href="/user/registration" role="button">Registration</a>
             </form>
             <c:if test="${requestScope.message!=null}">
                 <div class="alert alert-danger" role="alert">
