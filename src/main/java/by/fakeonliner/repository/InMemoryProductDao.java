@@ -7,10 +7,10 @@ import by.fakeonliner.entity.Mobile;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ProductRepository implements ProductDao{
+public class InMemoryProductDao implements ProductDao{
 
-    private final List<Laptop> laptops = new LinkedList<>();
-    private final List<Mobile> mobiles = new LinkedList<>();
+    private final static List<Laptop> laptops = new LinkedList<>();
+    private final static List<Mobile> mobiles = new LinkedList<>();
 
     @Override
     public void save(Object object) {
