@@ -1,61 +1,62 @@
 package by.fakeonliner.service;
 
 import by.fakeonliner.entity.User;
+import by.fakeonliner.repository.UserDao;
 import by.fakeonliner.repository.UserRepository;
 
 import java.util.List;
 
 public class UserService {
-    private UserRepository userRepository = new UserRepository();
+    private final UserDao userDao = new UserRepository();
 
 
     public User findByUsername(String userName) {
-        if (userRepository.existByLogin(userName)) {
-            return userRepository.getUser(userName);
+        if (userDao.existByLogin(userName)) {
+            return userDao.getUser(userName);
         }
         return null;
     }
 
     public List<User> getAllUsers() {
-        return userRepository.getAllUsers();
+        return userDao.getAllUsers();
     }
 
     public void changeFirstName(long userId, String newFirstName){
-        userRepository.changeFirstName(userId, newFirstName);
+        userDao.changeFirstName(userId, newFirstName);
     }
 
     public void changeLastName(long userId, String newLastName){
-        userRepository.changeLastName(userId, newLastName);
+        userDao.changeLastName(userId, newLastName);
     }
     public boolean existByUsername(String username) {
-        return userRepository.existByLogin(username);
+        return userDao.existByLogin(username);
     }
 
     public void save(User user) {
-        userRepository.save(user);
+        userDao.save(user);
     }
 
 
     public void changeUsername (long userId, String newUsername){
-        userRepository.changeUsername(userId, newUsername);
+        userDao.changeUsername(userId, newUsername);
     }
 
     public void changePassword (long userId, String newPassword){
-        userRepository.changePassword(userId, newPassword);
+        userDao.changePassword(userId, newPassword);
     }
 
     public void changePhoneNumber(long userId, String newPhoneNumber){
-        userRepository.changePhoneNumber(userId, newPhoneNumber);
+        userDao.changePhoneNumber(userId, newPhoneNumber);
     }
 
     public void changeEmail(long userId, String newEmail){
-        userRepository.changeEmail(userId, newEmail);
+        userDao.changeEmail(userId, newEmail);
     }
     public boolean existByPhoneNumber(String phoneNumber) {
-        return userRepository.existByPhoneNumber(phoneNumber);
+        return userDao.existByPhoneNumber(phoneNumber);
     }
 
     public boolean existByEmail(String email) {
-        return userRepository.existByEmail(email);
+        return userDao.existByEmail(email);
     }
 }

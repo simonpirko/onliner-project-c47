@@ -82,16 +82,16 @@ public class UserRepository implements UserDao{
     }
 
 
-
+    @Override
     public void changeFirstName(long userId, String newFirstName){
         for (User usr : users){
             if (usr.getId() == userId){
                 usr.setFirstName(newFirstName);
             }
         }
-
     }
 
+    @Override
     public void changeLastName(long userId, String newLastName){
         for (User usr : users){
             if (usr.getId() == userId){
@@ -100,6 +100,7 @@ public class UserRepository implements UserDao{
         }
     }
 
+    @Override
     public void changeUsername(long userId, String newUsername){
         for (User usr : users){
             if (usr.getId() == userId){
@@ -108,6 +109,7 @@ public class UserRepository implements UserDao{
         }
     }
 
+    @Override
     public void changePassword(long userId, String newPassword){
         for (User usr : users){
             if(usr.getId() == userId){
@@ -116,6 +118,7 @@ public class UserRepository implements UserDao{
         }
     }
 
+    @Override
     public void changePhoneNumber(long userId, String newPhoneNumber){
         for (User usr : users){
             if(usr.getId() == userId){
@@ -124,6 +127,7 @@ public class UserRepository implements UserDao{
         }
     }
 
+    @Override
     public  void changeEmail(long userId, String newEmail){
         for (User usr : users){
             if (usr.getId() == userId){

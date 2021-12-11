@@ -22,4 +22,15 @@ public interface UserDao {
 
     boolean existByPhoneNumber(String phoneNumber);
 
+    void changeFirstName(long userId, String newFirstName);
+
+    void changeLastName(long userId, String newLastName);
+
+    void changeUsername(long userId, String newUsername);
+
+    void changePassword(long userId, String newPassword);
+
+    void changePhoneNumber(long userId, String newPhoneNumber);
+
+    void changeEmail(long userId, String newEmail);
 }
