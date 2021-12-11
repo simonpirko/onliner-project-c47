@@ -37,42 +37,42 @@ public class RegistrationServlet extends HttpServlet {
         boolean flagMessage = false;
 
         if (regValid.isNullOrEmpty(firstName)) {
-            req.getSession().setAttribute("firstNameMessage", ConstantMessage.FIRST_NAME_IS_EMPTY.toString());
+            req.setAttribute("firstNameMessage", ConstantMessage.FIRST_NAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setFirstName(firstName);
         }
 
         if (regValid.isNullOrEmpty(lastName)) {
-            req.getSession().setAttribute("lastNameMessage", ConstantMessage.LAST_NAME_IS_EMPTY.toString());
+            req.setAttribute("lastNameMessage", ConstantMessage.LAST_NAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setLastName(lastName);
         }
 
         if (regValid.isNullOrEmpty(username)) {
-            req.getSession().setAttribute("usernameMessage", ConstantMessage.USERNAME_IS_EMPTY.toString());
+            req.setAttribute("usernameMessage", ConstantMessage.USERNAME_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setUsername(username);
         }
 
         if (regValid.isNullOrEmpty(password)) {
-            req.getSession().setAttribute("passwordMessage", ConstantMessage.PASSWORD_IS_EMPTY.toString());
+            req.setAttribute("passwordMessage", ConstantMessage.PASSWORD_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setPassword(password);
         }
 
         if (regValid.isNullOrEmpty(email)) {
-            req.getSession().setAttribute("emailMessage", ConstantMessage.EMAIL_IS_EMPTY.toString());
+            req.setAttribute("emailMessage", ConstantMessage.EMAIL_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setEmail(email);
         }
 
         if (regValid.isNullOrEmpty(phoneNumber)) {
-            req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_IS_EMPTY.toString());
+            req.setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_IS_EMPTY.toString());
             flagMessage = true;
         } else {
             user.setPhoneNumber(phoneNumber);
@@ -87,12 +87,12 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         if (userService.existByUsername(user.getUsername())) {
-            req.getSession().setAttribute("userMessage", ConstantMessage.USER_ALREADY_EXIST.toString());
+            req.setAttribute("userMessage", ConstantMessage.USER_ALREADY_EXIST.toString());
             flagMessage = true;
         }
 
         if (flagMessage) {
-            resp.sendRedirect("/user/registration");
+            getServletContext().getRequestDispatcher(ConstantPath.USER_REGISTRATION_JSP).forward(req, resp);
         } else {
             userService.save(user);
             resp.sendRedirect("/user/authorization");
