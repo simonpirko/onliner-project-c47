@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/admin/users", name = "CategoriesServlet")
+@WebServlet(value = "/admin/categories", name = "CategoriesServlet")
 public class CategoriesServlet extends HttpServlet {
 
     @Override
