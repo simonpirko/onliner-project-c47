@@ -13,9 +13,9 @@
 </head>
 <body class="text-center">
 <jsp:include page="/pages/_header.jsp"/>
-<div class="container">
-    <div class="row justify-center-center">
-        <div class="col-sm-3">
+<div class="container-flex">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-3 pt-3">
             <form action="/shop/registration" method="post">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">login</label>
