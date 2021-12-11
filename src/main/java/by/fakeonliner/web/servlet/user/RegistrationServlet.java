@@ -109,11 +109,11 @@ public class RegistrationServlet extends HttpServlet {
     private boolean isCorrectPhoneNumber(String phoneNumber, HttpServletRequest req) {
         if (regValid.isCorrectPhone(phoneNumber)) {
             if (userService.existByPhoneNumber(phoneNumber)) {
-                req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_ALREADY_EXIST.toString());
+                req.setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_ALREADY_EXIST.toString());
                 return true;
             }
         } else {
-            req.getSession().setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_INPUT_INCORRECTLY.toString());
+            req.setAttribute("phoneNumberMessage", ConstantMessage.PHONE_NUMBER_INPUT_INCORRECTLY.toString());
             return true;
         }
         return false;
@@ -122,11 +122,11 @@ public class RegistrationServlet extends HttpServlet {
     private boolean isCorrectEmail(String email, HttpServletRequest req) {
         if (regValid.isCorrectEmail(email)) {
             if (userService.existByEmail(email)) {
-                req.getSession().setAttribute("email", ConstantMessage.EMAIL_ALREADY_EXIST.toString());
+                req.setAttribute("email", ConstantMessage.EMAIL_ALREADY_EXIST.toString());
                 return true;
             }
         } else {
-            req.getSession().setAttribute("email", ConstantMessage.EMAIL_INPUT_INCORRECTLY.toString());
+            req.setAttribute("email", ConstantMessage.EMAIL_INPUT_INCORRECTLY.toString());
             return true;
         }
         return false;

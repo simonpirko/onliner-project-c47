@@ -54,7 +54,7 @@
 
             <div class="col col-lg-3 mb-3">
                 <label class="margin-input" class="form-label"><h4>Phone number</h4></label>
-                <input name="phoneNumber" type="text" class="form-control" placeholder="Surname">
+                <input name="phoneNumber" type="text" class="form-control" placeholder="Number">
             </div>
 
         </div>
