@@ -7,14 +7,14 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="/pages/home.jsp">FakeOnliner</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <c:if test="${sessionScope.user == null}">
             <form class="d-flex m-2" action="/search" method="post">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success  m-2" type="submit"><i class="bi bi-search"></i></button>
             </form>
-
-            <c:if test="${sessionScope.user == null}">
             <form class="d-flex m-2" action="/shop/registration" method="post">
-                <a class="btn btn-outline-success" href="/shop/registration" role="button"><i class="bi bi-shop"></i></a>
+                <a class="btn btn-outline-success" href="/shop/registration" role="button"><i
+                        class="bi bi-shop"></i></a>
             </form>
             <form class="d-flex m-2" action="/" method="post">
                 <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
@@ -25,17 +25,37 @@
                 </c:if>
             </form>
             <c:if test="${sessionScope.user != null}">
-            <a class="nav-link">${sessionScope.user.name}</a>
-            <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-success" href="/pages/user/user_profile.jsp"><i class="bi bi-person-circle"></i></a>
-            </form>
-            <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
-            </form>
-            <form class="d-flex m-2" action="/search" method="post">
-                <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
+                <c:if test="${sessionScope.user.status eq 'admin'}">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/users">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+                    </ul>
                 </c:if>
-            </form>
+<%--                <c:if test="${sessionScope.user.status eq 'user'}">--%>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success  m-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    <a class="nav-link">${sessionScope.user.name}</a>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-success" href="/pages/user/user_profile.jsp"><i
+                                class="bi bi-person-circle"></i></a>
+                    </form>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
+                    </form>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
+                    </form>
+<%--                </c:if>--%>
+            </c:if>
         </div>
     </div>
 </nav>
