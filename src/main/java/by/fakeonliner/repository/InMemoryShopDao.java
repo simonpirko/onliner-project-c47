@@ -5,7 +5,7 @@ import by.fakeonliner.entity.Shop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopRepository implements ShopDao {
+public class InMemoryShopDao implements ShopDao {
 
     private final static List<Shop> shops = new ArrayList<>();
     private long id = 0;

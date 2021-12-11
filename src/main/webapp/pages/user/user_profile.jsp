@@ -78,7 +78,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank" href="">Change profile</a>
+                                <a class="btn btn-primary" href="/user/changerUser" role="button">Change profile</a>
                             </div>
                         </div>
                     </div>

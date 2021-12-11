@@ -2,12 +2,12 @@ package by.fakeonliner.service;
 
 import by.fakeonliner.entity.Shop;
 import by.fakeonliner.repository.ShopDao;
-import by.fakeonliner.repository.ShopRepository;
+import by.fakeonliner.repository.InMemoryShopDao;
 
 import java.util.List;
 
 public class ShopService {
-    private final ShopDao shopDao  = new ShopRepository();
+    private final ShopDao shopDao  = new InMemoryShopDao();
 
     public boolean save(Shop shop) {
         if (!shopDao.existByLogin(shop.getLogin())) {
