@@ -39,10 +39,6 @@ public class InMemoryUserDao implements UserDao {
         users.add(user);
     }
 
-    @Override
-    public void edit(User user) {
-
-    }
 
     @Override
     public void delete(User user) {
