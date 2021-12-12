@@ -25,7 +25,7 @@
                 </form>
             </c:if>
             <c:if test="${sessionScope.user != null}">
-<%--                <c:if test="${sessionScope.user.status eq 'admin'}">--%>
+                <c:if test="${sessionScope.user.status eq 'admin'}">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/admin/users">Users</a>
@@ -37,24 +37,24 @@
                             <a class="nav-link" href="/admin/categories">Categories</a>
                         </li>
                     </ul>
-<%--                </c:if>--%>
-                                <c:if test="${sessionScope.user.status eq 'user'}">
-                <form class="d-flex m-2" action="/search" method="post">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success  m-2" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-                <a class="nav-link">${sessionScope.user.username}</a>
-                <form class="d-flex m-2" action="/search" method="post">
-                    <a class="btn btn-outline-success" href="/pages/user/user_profile.jsp"><i
-                            class="bi bi-person-circle"></i></a>
-                </form>
-                <form class="d-flex m-2" action="/search" method="post">
-                    <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
-                </form>
-                <form class="d-flex m-2" action="/search" method="post">
-                    <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
-                </form>
-                                </c:if>
+                </c:if>
+                <c:if test="${sessionScope.user.status eq 'user'}">
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success  m-2" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    <a class="nav-link">${sessionScope.user.username}</a>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-success" href="/pages/user/user_profile.jsp"><i
+                                class="bi bi-person-circle"></i></a>
+                    </form>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
+                    </form>
+                    <form class="d-flex m-2" action="/search" method="post">
+                        <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
+                    </form>
+                </c:if>
             </c:if>
         </div>
     </div>
