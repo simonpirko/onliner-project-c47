@@ -1,7 +1,7 @@
 package by.fakeonliner.repository.query_constant;
 
 public class UserQueryConstant {
-    public static final String ADD_USER = "INSERT INTO users (username, password, " +
+    public static final String ADD_USER_QUERY = "INSERT INTO users (username, password, " +
             "first_name, last_name, email, phone_number) VALUES(?, ?, ?, ?, ?, ?)";
     public static final String CHANGE_NAME_QUERY = "UPDATE users SET name=? WHERE id=?";
     public static final String CHANGE_LAST_NAME_QUERY = "UPDATE users SET last_name=? WHERE id=?";

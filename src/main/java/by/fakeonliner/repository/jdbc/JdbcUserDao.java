@@ -5,10 +5,7 @@ import by.fakeonliner.repository.UserDao;
 import by.fakeonliner.repository.configuration.JdbcConnection;
 import by.fakeonliner.repository.query_constant.UserQueryConstant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +61,7 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             user = new User();
             while (resultSet.next()) {
-                setUserFields(resultSet, user);
+                setUserFields(user, resultSet);
             }
 
         } catch (SQLException throwables) {
@@ -73,15 +70,40 @@ public class JdbcUserDao implements UserDao {
         return user;
     }
 
+    private void setUserFields(User user, ResultSet resultSet) throws SQLException {
+        user.setId(resultSet.getInt(1));
+        user.setUsername(resultSet.getString(2));
+        user.setPassword(resultSet.getString(3));
+        user.setFirstName(resultSet.getString(4));
+        user.setLastName(resultSet.getString(5));
+        user.setEmail(resultSet.getString(6));
+        user.setPhoneNumber(resultSet.getString(7));
+        user.setStatus(resultSet.getString(8));
+    }
+
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> list = new ArrayList<>();
+
+        try (Connection con = JdbcConnection.getConnection();
+             Statement statement = con.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(UserQueryConstant.GET_ALL_USERS_QUERY);
+            while (resultSet.next()) {
+                User user = new User();
+                setUserFields(user, resultSet);
+                list.add(user);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
     }
 
     @Override
     public void save(User user) {
         try (Connection con = JdbcConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.ADD_USER)) {
+             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.ADD_USER_QUERY)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
