@@ -3,6 +3,7 @@ package by.fakeonliner.repository;
 
 import by.fakeonliner.entity.Laptop;
 import by.fakeonliner.entity.Mobile;
+import by.fakeonliner.entity.Product;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class InMemoryProductDao implements ProductDao{
     }
 
     @Override
-    public List<Object> getProducts(String name) {
+    public List<Object> findByModel(String name) {
         return null;
     }
 
@@ -35,5 +36,20 @@ public class InMemoryProductDao implements ProductDao{
     @Override
     public void delete(long id) {
 
+    }
+
+    @Override
+    public List<Object> findByBrand(String name, String category) {
+        return null;
+    }
+
+    @Override
+    public List<Object> findByAllFromCategory(String category) {
+        return null;
+    }
+
+    @Override
+    public List<Object> findByPrice(double a, double b, String category) {
+        return null;
     }
 }
