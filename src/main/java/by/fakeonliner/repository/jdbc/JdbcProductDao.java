@@ -4,6 +4,7 @@ import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.repository.ProductDao;
 import by.fakeonliner.repository.configuration.JdbcConnection;
 import by.fakeonliner.repository.query_constant.ProductQueryConstant;
+import by.fakeonliner.repository.query_constant.UserQueryConstant;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,13 +30,23 @@ public class JdbcProductDao implements ProductDao {
     }
 
     @Override
-    public List<Object> findByModel(String name) {
-        List<Object> list = new ArrayList<>();
+    public List<ProductDto> findByModel(String model,String brand) {
+        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, name);
-            resultSet(preparedStatement, list);
+            preparedStatement.setString(1, model);
+            preparedStatement.setString(2, brand);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ProductDto productDto = new ProductDto();
+                productDto.setId(resultSet.getInt(ID));
+                productDto.setBrand(resultSet.getString(BRAND));
+                productDto.setPrice(resultSet.getInt(PRICE));
+                productDto.setModel(resultSet.getString(MODEL));
+                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+                productDto.setAverageRating(resultSet.getDouble(RATING));
+                list.add(productDto);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,17 +60,33 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public void delete(long id) {
-
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.DELETE_PRODUCT_BY_ID)) {
+            preparedStatement.setInt(1, (int)id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
-    public List<Object> findByBrand(String name, String category) {
-        List<Object> list = new ArrayList<>();
+    public List<ProductDto> findByBrand(String name, String category) {
+        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_BRAND)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, category);
-            resultSet(preparedStatement, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ProductDto productDto = new ProductDto();
+                productDto.setId(resultSet.getInt(ID));
+                productDto.setBrand(resultSet.getString(BRAND));
+                productDto.setPrice(resultSet.getInt(PRICE));
+                productDto.setModel(resultSet.getString(MODEL));
+                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+                productDto.setAverageRating(resultSet.getDouble(RATING));
+                list.add(productDto);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,14 +94,24 @@ public class JdbcProductDao implements ProductDao {
     }
 
     @Override
-    public List<Object> findByPrice(double min, double max, String category) {
-        List<Object> list = new ArrayList<>();
+    public List<ProductDto> findByPrice(double min, double max, String category) {
+        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_PRICE)) {
             preparedStatement.setDouble(1, min);
             preparedStatement.setDouble(2, max);
             preparedStatement.setString(3, category);
-            resultSet(preparedStatement, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ProductDto productDto = new ProductDto();
+                productDto.setId(resultSet.getInt(ID));
+                productDto.setBrand(resultSet.getString(BRAND));
+                productDto.setPrice(resultSet.getInt(PRICE));
+                productDto.setModel(resultSet.getString(MODEL));
+                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+                productDto.setAverageRating(resultSet.getDouble(RATING));
+                list.add(productDto);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,21 +119,9 @@ public class JdbcProductDao implements ProductDao {
     }
 
     @Override
-    public List<Object> findByAllFromCategory(String category) {
+    public List<ProductDto> findByAllFromCategory(String category) {
         return null;
     }
 
-    private void resultSet(PreparedStatement preparedStatement, List<Object> list) throws SQLException {
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            int id = resultSet.getInt(ID);
-            String brand = resultSet.getString(BRAND);
-            double price = resultSet.getDouble(PRICE);
-            String model = resultSet.getString(MODEL);
-            int dt = resultSet.getInt(MARKET_LAUNCH_DATE);
-            double rating = resultSet.getDouble(RATING);
-            ProductDto productDto = new ProductDto(id, brand, price, model, dt, rating);
-            list.add(productDto);
-        }
-    }
+
 }

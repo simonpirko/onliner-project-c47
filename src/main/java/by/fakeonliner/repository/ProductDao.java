@@ -1,5 +1,6 @@
 package by.fakeonliner.repository;
 
+import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.entity.Product;
 
 import java.util.List;
@@ -10,13 +11,13 @@ public interface ProductDao {
 
     boolean existByModel(String model);
 
-    List<Object> findByModel(String name);
+    List<ProductDto> findByModel(String model,String brand);
 
-    List<Object> findByBrand(String name, String category);
+    List<ProductDto> findByBrand(String name, String category);
 
-    List<Object> findByAllFromCategory(String category);
+    List<ProductDto> findByAllFromCategory(String category);
 
-    List<Object> findByPrice(double min, double max, String category);
+    List<ProductDto> findByPrice(double min, double max, String category);
 
     void edit(long id, Object object);
 
