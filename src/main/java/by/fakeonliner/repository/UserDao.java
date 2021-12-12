@@ -8,7 +8,7 @@ public interface UserDao {
 
     boolean existByLogin(String userName);
 
-    User getUser(String userName);
+    User findByUsername(String userName);
 
     List<User> getAllUsers();
 

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcUserDao implements UserDao {
@@ -55,8 +56,21 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User getUser(String userName) {
-        return null;
+    public User findByUsername(String username) {
+        User user = null;
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.FIND_BY_USERNAME_QUERY)) {
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user = new User();
+            while (resultSet.next()) {
+                setUserFields(resultSet, user);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
     }
 
     @Override
@@ -84,7 +98,13 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public void delete(User user) {
-
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.DELETE_USER_QUERY)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override

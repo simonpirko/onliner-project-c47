@@ -11,4 +11,8 @@ public class UserQueryConstant {
     public static final String CHANGE_EMAIL_QUERY = "UPDATE users SET email=? WHERE id=?";
     public static final String EXIST_BY_LOGIN_QUERY = "SELECT username FROM users WHERE username=?";
     public static final String EXIST_BY_PHONE_NUMBER_QUERY = "SELECT phone_number FROM users WHERE phone_number=?";
+    public static final String FIND_BY_USERNAME_QUERY = "SELECT * FROM users WHERE username=?";
+    public static final String GET_ALL_USERS_QUERY = "SELECT * FROM users";
+    public static final String DELETE_USER_QUERY = "DELETE FROM users WHERE username=?";
 }
+
