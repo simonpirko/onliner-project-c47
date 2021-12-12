@@ -12,7 +12,7 @@ class JdbcProductDaoTest {
     @Test
     void findByModel() {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
-        List<ProductDto> samsung = jdbcProductDao.findByModel("iPhone","Apple");
+        List<ProductDto> samsung = jdbcProductDao.findByModel("iPhone");
         System.out.println(samsung);
         assertNotNull(samsung);
     }
@@ -21,12 +21,20 @@ class JdbcProductDaoTest {
     void findByPrice() {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
         List<ProductDto> mobile = jdbcProductDao.findByPrice(2500.0, 3064.0, "mobile");
-        System.out.println(mobile);
+        assertNotNull(mobile);
     }
 
     @Test
     void delete() {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
         jdbcProductDao.delete(2);
+    }
+
+    @Test
+    void existByModel() {
+        JdbcProductDao jdbcProductDao = new JdbcProductDao();
+        boolean result = jdbcProductDao.existByModel("Смартфон Apple iPhone 13 128GB (синий)");
+        System.out.println(result);
+        assertNotNull(result);
     }
 }

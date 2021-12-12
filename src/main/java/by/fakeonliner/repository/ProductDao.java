@@ -11,7 +11,7 @@ public interface ProductDao {
 
     boolean existByModel(String model);
 
-    List<ProductDto> findByModel(String model,String brand);
+    List<ProductDto> findByModel(String model);
 
     List<ProductDto> findByBrand(String name, String category);
 

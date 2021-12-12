@@ -4,7 +4,6 @@ import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.repository.ProductDao;
 import by.fakeonliner.repository.configuration.JdbcConnection;
 import by.fakeonliner.repository.query_constant.ProductQueryConstant;
-import by.fakeonliner.repository.query_constant.UserQueryConstant;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,32 +25,32 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public boolean existByModel(String model) {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
+            preparedStatement.setString(1, model);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
-    public List<ProductDto> findByModel(String model,String brand) {
+    public List<ProductDto> findByModel(String model) {
         List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
             preparedStatement.setString(1, model);
-            preparedStatement.setString(2, brand);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                ProductDto productDto = new ProductDto();
-                productDto.setId(resultSet.getInt(ID));
-                productDto.setBrand(resultSet.getString(BRAND));
-                productDto.setPrice(resultSet.getInt(PRICE));
-                productDto.setModel(resultSet.getString(MODEL));
-                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
-                productDto.setAverageRating(resultSet.getDouble(RATING));
-                list.add(productDto);
-            }
+            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
     }
+
 
     @Override
     public void edit(long id, Object object) {
@@ -62,10 +61,10 @@ public class JdbcProductDao implements ProductDao {
     public void delete(long id) {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.DELETE_PRODUCT_BY_ID)) {
-            preparedStatement.setInt(1, (int)id);
+            preparedStatement.setInt(1, (int) id);
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -76,17 +75,7 @@ public class JdbcProductDao implements ProductDao {
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_BRAND)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, category);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                ProductDto productDto = new ProductDto();
-                productDto.setId(resultSet.getInt(ID));
-                productDto.setBrand(resultSet.getString(BRAND));
-                productDto.setPrice(resultSet.getInt(PRICE));
-                productDto.setModel(resultSet.getString(MODEL));
-                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
-                productDto.setAverageRating(resultSet.getDouble(RATING));
-                list.add(productDto);
-            }
+            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,17 +90,7 @@ public class JdbcProductDao implements ProductDao {
             preparedStatement.setDouble(1, min);
             preparedStatement.setDouble(2, max);
             preparedStatement.setString(3, category);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                ProductDto productDto = new ProductDto();
-                productDto.setId(resultSet.getInt(ID));
-                productDto.setBrand(resultSet.getString(BRAND));
-                productDto.setPrice(resultSet.getInt(PRICE));
-                productDto.setModel(resultSet.getString(MODEL));
-                productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
-                productDto.setAverageRating(resultSet.getDouble(RATING));
-                list.add(productDto);
-            }
+            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,8 +99,28 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public List<ProductDto> findByAllFromCategory(String category) {
-        return null;
+        List<ProductDto> list = new ArrayList<>();
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.ALL_FROM_CATEGORY)) {
+            preparedStatement.setString(1, category);
+            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-
+    private void resultSet(PreparedStatement preparedStatement, String id, String brand, String price, String model, String marketLaunchDate, String rating, List<ProductDto> list) throws SQLException {
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(resultSet.getInt(id));
+            productDto.setBrand(resultSet.getString(brand));
+            productDto.setPrice(resultSet.getInt(price));
+            productDto.setModel(resultSet.getString(model));
+            productDto.setMarketLaunchDate(resultSet.getInt(marketLaunchDate));
+            productDto.setAverageRating(resultSet.getDouble(rating));
+            list.add(productDto);
+        }
+    }
 }
