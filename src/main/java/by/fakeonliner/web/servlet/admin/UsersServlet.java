@@ -1,6 +1,10 @@
 package by.fakeonliner.web.servlet.admin;
 
+import by.fakeonliner.entity.User;
+import by.fakeonliner.service.AdminService;
+import by.fakeonliner.service.UserService;
 import by.fakeonliner.web.constant.ConstantPath;
+import by.fakeonliner.web.validator.RegistrationValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +12,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(value = "/admin/users", name = "UsersServlet")
 public class UsersServlet extends HttpServlet {
 
+    private UserService userService;
+    private AdminService adminService;
+
+    @Override
+    public void init() throws ServletException {
+        userService = new UserService();
+        adminService = new AdminService();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<User> users = userService.getAllUsers();
+        req.getSession().setAttribute("userList", users);
         getServletContext().getRequestDispatcher(ConstantPath.ADMIN_USERS_JSP).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String userNumber = req.getParameter("userNumber");
+        String operation = req.getParameter("userOperation");
+
+        List<User> users = (List<User>) req.getSession().getAttribute("userList");
+        User user = users.get(Integer.parseInt(userNumber));
+
+        users = adminService.performOperation(operation, user, users, userNumber);
+
+        req.getSession().setAttribute("userList", users);
+
+        getServletContext().getRequestDispatcher(ConstantPath.ADMIN_USERS_JSP).forward(req, resp);
     }
 }
