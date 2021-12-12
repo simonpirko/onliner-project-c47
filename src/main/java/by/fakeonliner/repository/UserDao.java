@@ -8,13 +8,12 @@ public interface UserDao {
 
     boolean existByLogin(String userName);
 
-    User getUser(String userName);
+    User findByUsername(String userName);
 
     List<User> getAllUsers();
 
     void save(User user);
 
-    void edit(User user);
 
     void delete(User user);
 

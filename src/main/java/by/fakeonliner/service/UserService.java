@@ -12,7 +12,7 @@ public class UserService {
 
     public User findByUsername(String userName) {
         if (userDao.existByLogin(userName)) {
-            return userDao.getUser(userName);
+            return userDao.findByUsername(userName);
         }
         return null;
     }

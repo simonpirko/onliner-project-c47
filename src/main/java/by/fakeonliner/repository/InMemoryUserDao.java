@@ -20,7 +20,7 @@ public class InMemoryUserDao implements UserDao {
     }
 
     @Override
-    public User getUser(String userName) {
+    public User findByUsername(String userName) {
         for (User usr : users) {
             if (usr.getUsername().equals(userName)) {
                 return usr;
@@ -39,10 +39,6 @@ public class InMemoryUserDao implements UserDao {
         users.add(user);
     }
 
-    @Override
-    public void edit(User user) {
-
-    }
 
     @Override
     public void delete(User user) {
