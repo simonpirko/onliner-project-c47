@@ -41,8 +41,8 @@ public class JdbcProductDao implements ProductDao {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
             preparedStatement.setString(1, model);
-            preparedStatement.execute();
-            return getProductDtoList(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,8 +73,8 @@ public class JdbcProductDao implements ProductDao {
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_BRAND)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, category);
-            preparedStatement.execute();
-            return getProductDtoList(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,8 +88,8 @@ public class JdbcProductDao implements ProductDao {
             preparedStatement.setDouble(1, min);
             preparedStatement.setDouble(2, max);
             preparedStatement.setString(3, category);
-            preparedStatement.execute();
-            return getProductDtoList(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,17 +101,16 @@ public class JdbcProductDao implements ProductDao {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.ALL_FROM_CATEGORY)) {
             preparedStatement.setString(1, category);
-            preparedStatement.execute();
-            return getProductDtoList(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private List<ProductDto> getProductDtoList(PreparedStatement preparedStatement) throws SQLException {
+    private List<ProductDto> getProductDtoList(ResultSet resultSet) throws SQLException {
         List<ProductDto> list = new ArrayList<>();
-        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             ProductDto productDto = new ProductDto();
             productDto.setId(resultSet.getInt(ID));
