@@ -17,6 +17,8 @@ public class JdbcProductDao implements ProductDao {
     private final static String MARKET_LAUNCH_DATE = "market_launch_date";
     private final static String RATING = "rating";
     private final static String CATEGORY = "category";
+    private final static String LINK_PHOTO = "product_link_image";
+    private final static String DESCRIPTION = "description";
 
     @Override
     public void save(Object object) {
@@ -119,6 +121,8 @@ public class JdbcProductDao implements ProductDao {
             productDto.setModel(resultSet.getString(MODEL));
             productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
             productDto.setAverageRating(resultSet.getDouble(RATING));
+            productDto.setLinkPhoto(resultSet.getString(LINK_PHOTO));
+            productDto.setLinkPhoto(resultSet.getString(DESCRIPTION));
             list.add(productDto);
         }
         return list;

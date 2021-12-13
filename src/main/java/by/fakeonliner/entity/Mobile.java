@@ -18,4 +18,5 @@ public class Mobile extends Product {
     private String flashMemory;
     private String color;
     private String mobileType;
+
 }

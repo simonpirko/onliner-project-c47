@@ -15,6 +15,8 @@ public class ProductDto {
     private String brand;
     private double price;
     private String model;
+    private String linkPhoto;
     private int marketLaunchDate;
     private double averageRating;
+    private String description;
 }
