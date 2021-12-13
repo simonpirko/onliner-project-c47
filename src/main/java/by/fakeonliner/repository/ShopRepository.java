@@ -20,33 +20,26 @@ public class ShopRepository implements ShopDao {
     @Override
     public boolean existByLogin(String login) {
 
-      shops.forEach(shop -> {
-
-         if (shop.getLogin().equals(login)) {
-             return true;
-         }
-      });
-      return false;
-
-
-//        for (Shop sh : shops) {
-//            if (sh.getLogin().equals(login)) {
-//                return true;
-//            }
-//        }
-//        return false;
+        shops.stream()
+                .filter(shop -> shop.getLogin().equals(login)).findFirst()
+                .map(shop -> {
+                    return true;
+                });
+        return false;
     }
 
     @Override
     public Shop getShop(String login) {
-        shops.forEach(shop -> shop.getLogin().equals(login));
+
+
+
 
 //        for (Shop sh : shops) {
 //            if (sh.getLogin().equals(login)) {
 //                return sh;
 //            }
 //        }
-       return null;
+        return null;
     }
 
     @Override
