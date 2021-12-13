@@ -18,6 +18,9 @@
     <form action="/user/registration" method="post">
 
         <div class="row justify-content-md-center">
+            <figure class="text-center g-5 pt-5">
+                <h1 class="display-5">Registration</h1>
+            </figure>
 
             <div class="col col-lg-3 mb-3">
                 <label class="margin-input" class="form-label"><h4>Username</h4></label>

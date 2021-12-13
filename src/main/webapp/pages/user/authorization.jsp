@@ -15,10 +15,13 @@
 <jsp:include page="/pages/_header.jsp"/>
 <div class="container-fluid">
     <div class="row justify-content-md-center pt-3">
+        <figure class="text-center g-5 pt-5">
+            <h1 class="display-5">Authorization</h1>
+        </figure>
         <div class="col-sm-3">
             <form action="/user/authorization" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">login</label>
+                    <label for="exampleInputEmail1" class="form-label">Login</label>
                     <input type="text" name="username" class="form-control" id="exampleInputEmail1"
                            aria-describedby="emailHelp">
                 </div>
