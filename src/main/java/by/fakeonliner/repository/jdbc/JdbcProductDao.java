@@ -29,9 +29,7 @@ public class JdbcProductDao implements ProductDao {
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
             preparedStatement.setString(1, model);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return true;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,15 +38,15 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public List<ProductDto> findByModel(String model) {
-        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
             preparedStatement.setString(1, model);
-            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
 
@@ -62,7 +60,7 @@ public class JdbcProductDao implements ProductDao {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.DELETE_PRODUCT_BY_ID)) {
             preparedStatement.setInt(1, (int) id);
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,57 +68,59 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public List<ProductDto> findByBrand(String name, String category) {
-        List<ProductDto> list = new ArrayList<>();
+
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_BRAND)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, category);
-            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     @Override
     public List<ProductDto> findByPrice(double min, double max, String category) {
-        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_PRICE)) {
             preparedStatement.setDouble(1, min);
             preparedStatement.setDouble(2, max);
             preparedStatement.setString(3, category);
-            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     @Override
     public List<ProductDto> findByAllFromCategory(String category) {
-        List<ProductDto> list = new ArrayList<>();
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.ALL_FROM_CATEGORY)) {
             preparedStatement.setString(1, category);
-            resultSet(preparedStatement, ID, BRAND, PRICE, MODEL, MARKET_LAUNCH_DATE, RATING, list);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
-    private void resultSet(PreparedStatement preparedStatement, String id, String brand, String price, String model, String marketLaunchDate, String rating, List<ProductDto> list) throws SQLException {
-        ResultSet resultSet = preparedStatement.executeQuery();
+    private List<ProductDto> getProductDtoList(ResultSet resultSet) throws SQLException {
+        List<ProductDto> list = new ArrayList<>();
         while (resultSet.next()) {
             ProductDto productDto = new ProductDto();
-            productDto.setId(resultSet.getInt(id));
-            productDto.setBrand(resultSet.getString(brand));
-            productDto.setPrice(resultSet.getInt(price));
-            productDto.setModel(resultSet.getString(model));
-            productDto.setMarketLaunchDate(resultSet.getInt(marketLaunchDate));
-            productDto.setAverageRating(resultSet.getDouble(rating));
+            productDto.setId(resultSet.getInt(ID));
+            productDto.setBrand(resultSet.getString(BRAND));
+            productDto.setPrice(resultSet.getInt(PRICE));
+            productDto.setModel(resultSet.getString(MODEL));
+            productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+            productDto.setAverageRating(resultSet.getDouble(RATING));
             list.add(productDto);
         }
+        return list;
     }
 }
