@@ -10,21 +10,21 @@ public class ShopService {
     private final ShopDao shopDao  = new InMemoryShopDao();
 
     public boolean save(Shop shop) {
-        if (!shopDao.existByEmail(shop.getLogin())) {
+        if (!shopDao.existByEmail(shop.getEmail())) {
             shopDao.save(shop);
             return true;
         }
         return false;
     }
 
-    public Shop findByLogin(String login) {
-        if (shopDao .existByEmail(login)) {
-            return shopDao .getShopByEmail(login);
+    public Shop findByEmail(String email) {
+        if (shopDao.existByEmail(email)) {
+            return shopDao.getShopByEmail(email);
         }
         return null;
     }
 
     public List<Shop> getShopList() {
-        return shopDao .getShopList();
+        return shopDao.getShopList();
     }
 }

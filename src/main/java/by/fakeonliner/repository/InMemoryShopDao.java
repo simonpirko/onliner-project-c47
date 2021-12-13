@@ -19,7 +19,7 @@ public class InMemoryShopDao implements ShopDao {
     @Override
     public boolean existByEmail(String email) {
         for (Shop sh : shops) {
-            if (sh.getLogin().equals(email)) {
+            if (sh.getEmail().equals(email)) {
                 return true;
             }
         }
@@ -29,7 +29,7 @@ public class InMemoryShopDao implements ShopDao {
     @Override
     public Shop getShopByEmail(String email) {
         for (Shop sh : shops) {
-            if (sh.getLogin().equals(email)) {
+            if (sh.getEmail().equals(email)) {
                 return sh;
             }
         }

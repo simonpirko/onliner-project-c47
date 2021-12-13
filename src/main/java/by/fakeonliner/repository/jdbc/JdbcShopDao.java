@@ -6,7 +6,7 @@ import by.fakeonliner.repository.configuration.JdbcConnection;
 import by.fakeonliner.repository.query_constant.ShopQueryConstant;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class JdbcShopDao implements ShopDao {
@@ -33,6 +33,7 @@ public class JdbcShopDao implements ShopDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return resultSet.next();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -41,6 +42,16 @@ public class JdbcShopDao implements ShopDao {
 
     @Override
     public Shop getShopByEmail(String email) {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ShopQueryConstant.GET_SHOP_BY_EMAIL_QUERY)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return getShop(resultSet);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
@@ -85,12 +96,13 @@ public class JdbcShopDao implements ShopDao {
         }
     }
 
+
     private List<Shop> getShopList(ResultSet rs) throws SQLException {
-        List<Shop> shops = new ArrayList<>();
+        LinkedList<Shop> shops = new LinkedList<>();
         while (rs.next()) {
             Shop shop = new Shop();
             setShopFields(shop, rs);
-            shops.add(shop);
+            shops.addFirst(shop);
         }
         return shops;
     }
@@ -104,5 +116,15 @@ public class JdbcShopDao implements ShopDao {
         shop.setContactAddress(resultSet.getString(6));
         shop.setDescription(resultSet.getString(7));
         shop.setRating(resultSet.getString(8));
+        shop.setCountRating(resultSet.getInt(9));
+    }
+
+    private Shop getShop(ResultSet rs) throws SQLException {
+        Shop shop = new Shop();
+        if(rs.next()) {
+            setShopFields(shop, rs);
+            return shop;
+        }
+        return null;
     }
 }
