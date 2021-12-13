@@ -30,10 +30,11 @@ public class JdbcMobileDao {
         return false;
     }
 
-    public Mobile getMobileById(long id) {
+    public Mobile getMobileById(long id, String category) {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(MobileQueryConstant.GET_MOBILE_BY_ID_QUERY)) {
             preparedStatement.setInt(1, (int) id);
+            preparedStatement.setString(2, category);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getMobile(resultSet);

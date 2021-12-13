@@ -48,8 +48,9 @@ public class ProductService {
 
     public Object getProduct(long id, String category) {
         switch(category) {
-            case "mobile" : {
-                return findMobileById(id);
+            case "phones" :
+            case "tablet" : {
+                return findMobileById(id, category);
             }
             case "laptop" : {
                 return findLaptopById(id);
@@ -59,8 +60,8 @@ public class ProductService {
     }
 
 
-    private Mobile findMobileById(long id) {
-        return jdbcMobileDao.getMobileById(id);
+    private Mobile findMobileById(long id, String category) {
+        return jdbcMobileDao.getMobileById(id, category);
     }
 
     private Laptop findLaptopById(long id) {
