@@ -10,7 +10,7 @@ public class ShopService {
     private final ShopDao shopDao  = new InMemoryShopDao();
 
     public boolean save(Shop shop) {
-        if (!shopDao.existByEmail(shop.getEmail())) {
+        if (shopDao.existByEmail(shop.getEmail())) {
             shopDao.save(shop);
             return true;
         }
