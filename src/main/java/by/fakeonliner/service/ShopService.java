@@ -10,7 +10,7 @@ public class ShopService {
     private final ShopDao shopDao  = new ShopRepository();
 
     public boolean save(Shop shop) {
-        if (!shopDao.existByLogin(shop.getLogin())) {
+        if (shopDao.existByLogin(shop.getLogin())) {
             shopDao.save(shop);
             return true;
         }
