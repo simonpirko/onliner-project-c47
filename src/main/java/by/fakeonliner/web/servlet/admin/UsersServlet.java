@@ -4,7 +4,6 @@ import by.fakeonliner.entity.User;
 import by.fakeonliner.service.AdminService;
 import by.fakeonliner.service.UserService;
 import by.fakeonliner.web.constant.ConstantPath;
-import by.fakeonliner.web.validator.RegistrationValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +28,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users = userService.getAllUsers();
-        req.getSession().setAttribute("userList", users);
+        req.setAttribute("userList", users);
         getServletContext().getRequestDispatcher(ConstantPath.ADMIN_USERS_JSP).forward(req, resp);
     }
 
@@ -38,7 +37,7 @@ public class UsersServlet extends HttpServlet {
         String userNumber = req.getParameter("userNumber");
         String operation = req.getParameter("userOperation");
 
-        List<User> users = (List<User>) req.getSession().getAttribute("userList");
+        List<User> users = (List<User>) req.getAttribute("userList");
         User user = users.get(Integer.parseInt(userNumber));
 
         users = adminService.performOperation(operation, user, users, userNumber);
