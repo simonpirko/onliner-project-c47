@@ -8,6 +8,7 @@ import java.util.List;
 public class ShopRepository implements ShopDao {
 
     private final static List<Shop> shops = new ArrayList<>();
+
     private long id = 0;
 
     @Override
@@ -18,22 +19,34 @@ public class ShopRepository implements ShopDao {
 
     @Override
     public boolean existByLogin(String login) {
-        for (Shop sh : shops) {
-            if (sh.getLogin().equals(login)) {
-                return true;
-            }
-        }
-        return false;
+
+      shops.forEach(shop -> {
+
+         if (shop.getLogin().equals(login)) {
+             return true;
+         }
+      });
+      return false;
+
+
+//        for (Shop sh : shops) {
+//            if (sh.getLogin().equals(login)) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     @Override
     public Shop getShop(String login) {
-        for (Shop sh : shops) {
-            if (sh.getLogin().equals(login)) {
-                return sh;
-            }
-        }
-        return null;
+        shops.forEach(shop -> shop.getLogin().equals(login));
+
+//        for (Shop sh : shops) {
+//            if (sh.getLogin().equals(login)) {
+//                return sh;
+//            }
+//        }
+       return null;
     }
 
     @Override
