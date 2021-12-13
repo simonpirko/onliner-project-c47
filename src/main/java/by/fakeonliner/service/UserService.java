@@ -3,61 +3,72 @@ package by.fakeonliner.service;
 import by.fakeonliner.entity.User;
 import by.fakeonliner.repository.UserDao;
 import by.fakeonliner.repository.InMemoryUserDao;
+import by.fakeonliner.repository.jdbc.JdbcProductDao;
+import by.fakeonliner.repository.jdbc.JdbcUserDao;
 
 import java.util.List;
 
 public class UserService {
-    private final UserDao userDao = new InMemoryUserDao();
+    private final JdbcUserDao jdbcUserDao =new JdbcUserDao();
+    private static UserService instance;
 
+    private UserService(){};
+
+    public static synchronized UserService getInstance() {
+        if(instance == null){
+            instance = new UserService();
+        }
+        return instance;
+    }
 
     public User findByUsername(String userName) {
-        if (userDao.existByLogin(userName)) {
-            return userDao.findByUsername(userName);
+        if (jdbcUserDao.existByLogin(userName)) {
+            return jdbcUserDao.findByUsername(userName);
         }
         return null;
     }
 
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return jdbcUserDao.getAllUsers();
     }
 
     public boolean existByUsername(String username) {
-        return userDao.existByLogin(username);
+        return jdbcUserDao.existByLogin(username);
     }
 
     public void save(User user) {
-        userDao.save(user);
+        jdbcUserDao.save(user);
     }
 
     public boolean existByPhoneNumber(String phoneNumber) {
-        return userDao.existByPhoneNumber(phoneNumber);
+        return jdbcUserDao.existByPhoneNumber(phoneNumber);
     }
 
     public boolean existByEmail(String email) {
-        return userDao.existByEmail(email);
+        return jdbcUserDao.existByEmail(email);
     }
 
     public void changeUsername (long userId, String newUsername){
-        userDao.changeUsername(userId, newUsername);
+        jdbcUserDao.changeUsername(userId, newUsername);
     }
 
     public void changePassword (long userId, String newPassword){
-        userDao.changePassword(userId, newPassword);
+        jdbcUserDao.changePassword(userId, newPassword);
     }
 
     public void changePhoneNumber(long userId, String newPhoneNumber){
-        userDao.changePhoneNumber(userId, newPhoneNumber);
+        jdbcUserDao.changePhoneNumber(userId, newPhoneNumber);
     }
 
     public void changeEmail(long userId, String newEmail){
-        userDao.changeEmail(userId, newEmail);
+        jdbcUserDao.changeEmail(userId, newEmail);
     }
 
     public void changeFirstName(long userId, String newFirstName){
-        userDao.changeFirstName(userId, newFirstName);
+        jdbcUserDao.changeFirstName(userId, newFirstName);
     }
 
     public void changeLastName(long userId, String newLastName){
-        userDao.changeLastName(userId, newLastName);
+        jdbcUserDao.changeLastName(userId, newLastName);
     }
 }

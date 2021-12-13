@@ -13,9 +13,13 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/user/authorization")
-public class AuthorizationUserServlet  extends HttpServlet {
-    private final UserService userService = new UserService();
+public class AuthorizationUserServlet extends HttpServlet {
+    private UserService userService;
 
+    @Override
+    public void init() throws ServletException {
+        userService = UserService.getInstance();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
