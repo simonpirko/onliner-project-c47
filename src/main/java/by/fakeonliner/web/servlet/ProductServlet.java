@@ -1,5 +1,9 @@
 package by.fakeonliner.web.servlet;
 
+import by.fakeonliner.dto.ProductDto;
+import by.fakeonliner.entity.Mobile;
+import by.fakeonliner.service.ProductService;
+import by.fakeonliner.service.UserService;
 import by.fakeonliner.web.constant.ConstantPath;
 
 import javax.servlet.ServletException;
@@ -8,12 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 
+    private ProductService productService;
+
+    @Override
+    public void init() throws ServletException {
+        productService = ProductService.getInstance();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String category = req.getParameter("category");
+        String numberProduct = req.getParameter("productNumber");
+        List<ProductDto> list = (List<ProductDto>) req.getSession().getAttribute("productList");
+
+        ProductDto productDto = list.get(Integer.parseInt(numberProduct));
+        Object product = productService.getProduct(productDto.getId(), category);
+
+        req.setAttribute("productDto", productDto);
+        req.setAttribute("product", product);
+
         getServletContext().getRequestDispatcher(ConstantPath.PRODUCT_JSP).forward(req, resp);
     }
 
