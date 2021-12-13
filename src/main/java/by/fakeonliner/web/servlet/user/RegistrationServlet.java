@@ -19,6 +19,11 @@ public class RegistrationServlet extends HttpServlet {
     private UserService userService;
     private RegistrationValidator regValid;
 
+    @Override
+    public void init() throws ServletException {
+        userService = UserService.getInstance();
+        regValid = new RegistrationValidator();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -97,12 +102,6 @@ public class RegistrationServlet extends HttpServlet {
             userService.save(user);
             resp.sendRedirect("/user/authorization");
         }
-    }
-
-    @Override
-    public void init() throws ServletException {
-        userService = new UserService();
-        regValid = new RegistrationValidator();
     }
 
 

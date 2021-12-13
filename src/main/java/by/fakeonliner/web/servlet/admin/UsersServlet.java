@@ -21,7 +21,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = UserService.getInstance();
         adminService = new AdminService();
     }
 
