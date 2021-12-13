@@ -28,13 +28,13 @@
                 <c:if test="${sessionScope.user.status eq 'admin'}">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/users">Users</a>
+                            <a class="nav-link active" aria-current="page" href="/admin/users">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/products">Products</a>
+                            <a class="nav-link" href="/admin/products">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/categories">Categories</a>
+                            <a class="nav-link" href="/admin/categories">Categories</a>
                         </li>
                     </ul>
                 </c:if>
