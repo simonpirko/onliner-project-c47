@@ -5,7 +5,7 @@ import by.fakeonliner.entity.Shop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopRepository implements ShopDao{
+public class ShopRepository implements ShopDao {
 
     private final List<Shop> shops = new ArrayList<>();
     private long id = 0;
@@ -18,51 +18,32 @@ public class ShopRepository implements ShopDao{
 
     @Override
     public boolean existByLogin(String login) {
-        if (!shops.isEmpty()) {
-            for (Shop sh : shops) {
-                if (sh.getLogin().equals(login)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        shops.stream()
+                .filter(shop -> shop.getLogin().equals(login)).findFirst();
+        return shops.isEmpty();
+
     }
+
 
     @Override
     public Shop getShop(String login) {
-        if (!shops.isEmpty()) {
-            for (Shop sh : shops) {
-                if (sh.getLogin().equals(login)) {
-                    return sh;
-                }
-            }
-
-        }
+        shops.stream()
+                .filter(shop -> shop.getLogin().equals(login)).findFirst();
         return null;
     }
 
+
     @Override
     public void edit(Shop shop) {
-        if (!shops.isEmpty()) {
-            for (Shop sh : shops) {
-                if (sh.getId() == shop.getId()) {
-                    shops.remove(sh);
-                    shops.add(shop);
-                    return;
-                }
-            }
+        if (shops.removeIf(sh -> sh.getId() == shop.getId())) {
+            shops.add(shop);
         }
     }
 
     @Override
     public void delete(Shop shop) {
-        if (!shops.isEmpty()) {
-            for (Shop sh : shops) {
-                if (sh.getId() == shop.getId()) {
-                    shops.remove(shop);
-                    return;
-                }
-            }
+        shops.removeIf(sh -> sh.getId() == shop.getId()); {
+            return;
         }
     }
 
