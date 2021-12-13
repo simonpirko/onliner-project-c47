@@ -26,17 +26,16 @@ public class RegistrationShopServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String phoneNumber = req.getParameter("phoneNumber");
         String email = req.getParameter("email");
 
-        if (!shopService.save(new Shop(login, password, name, phoneNumber, email))) {
-            req.setAttribute("alert", "This login exists");
-            getServletContext().getRequestDispatcher(ConstantPath.SHOP_REGISTRATION_JSP).forward(req, resp);
-        } else {
+        if (shopService.save(new Shop(email, password, name, phoneNumber))) {
             resp.sendRedirect(ConstantPath.SHOP_AUTHORIZATION_JSP);
+        } else {
+            req.setAttribute("alert", "This email exists");
+            getServletContext().getRequestDispatcher(ConstantPath.SHOP_REGISTRATION_JSP).forward(req, resp);
         }
     }
 }

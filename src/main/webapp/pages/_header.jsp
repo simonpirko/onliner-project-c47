@@ -12,8 +12,8 @@
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success  m-2" type="submit"><i class="bi bi-search"></i></button>
                 </form>
-                <form class="d-flex m-2" action="/shop/registration" method="post">
-                    <a class="btn btn-outline-success" href="/shop/registration" role="button"><i
+                <form class="d-flex m-2" action="/shop/authorization" method="post">
+                    <a class="btn btn-outline-success" href="/shop/authorization" role="button"><i
                             class="bi bi-shop"></i></a>
                 </form>
                 <form class="d-flex m-2" action="/" method="post">

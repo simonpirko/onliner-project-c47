@@ -7,8 +7,8 @@ import java.util.List;
 public interface ShopDao {
 
     void save(Shop shop);
-    boolean existByLogin(String login);
-    Shop getShop(String login);
+    boolean existByEmail(String email);
+    Shop getShopByEmail(String email);
     List<Shop> getShopList();
     void edit(Shop shop);
     void delete(Shop shop);
