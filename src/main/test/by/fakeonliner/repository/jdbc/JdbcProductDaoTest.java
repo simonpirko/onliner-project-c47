@@ -21,6 +21,7 @@ class JdbcProductDaoTest {
     void findByPrice() {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
         List<ProductDto> mobile = jdbcProductDao.findByPrice(2500.0, 3064.0, "mobile");
+        System.out.println(mobile);
         assertNotNull(mobile);
     }
 
@@ -33,8 +34,7 @@ class JdbcProductDaoTest {
     @Test
     void existByModel() {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
-        boolean result = jdbcProductDao.existByModel("Смартфон Apple iPhone 13 128GB (синий)");
+        boolean result = jdbcProductDao.existByModel("iPhone");
         System.out.println(result);
-        assertNotNull(result);
     }
 }

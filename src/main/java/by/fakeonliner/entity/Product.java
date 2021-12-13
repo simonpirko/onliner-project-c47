@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public
  abstract class Product {
     private long id;
     private String brand;
-    private double price;
+    private BigDecimal price;
     private String model;
     private int marketLaunchDate;
     private double averageRating;
