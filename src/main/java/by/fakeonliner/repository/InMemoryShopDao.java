@@ -17,9 +17,9 @@ public class InMemoryShopDao implements ShopDao {
     }
 
     @Override
-    public boolean existByLogin(String login) {
+    public boolean existByEmail(String email) {
         for (Shop sh : shops) {
-            if (sh.getLogin().equals(login)) {
+            if (sh.getLogin().equals(email)) {
                 return true;
             }
         }
@@ -27,9 +27,9 @@ public class InMemoryShopDao implements ShopDao {
     }
 
     @Override
-    public Shop getShop(String login) {
+    public Shop getShopByEmail(String email) {
         for (Shop sh : shops) {
-            if (sh.getLogin().equals(login)) {
+            if (sh.getLogin().equals(email)) {
                 return sh;
             }
         }
