@@ -4,6 +4,7 @@ import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.entity.Laptop;
 import by.fakeonliner.entity.Mobile;
 import by.fakeonliner.repository.CategoryProductDao;
+import by.fakeonliner.repository.jdbc.JdbcLaptopDao;
 import by.fakeonliner.repository.jdbc.JdbcMobileDao;
 import by.fakeonliner.repository.jdbc.JdbcProductDao;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class ProductService {
     private final JdbcProductDao jdbcProductDao = new JdbcProductDao();
     private final CategoryProductDao jdbcMobileDao = new JdbcMobileDao();
+    private final CategoryProductDao jdbcLaptopDao = new JdbcLaptopDao();
     private static ProductService instance;
 
     private ProductService(){};
@@ -47,25 +49,25 @@ public class ProductService {
         return jdbcProductDao.findByAllFromCategory(category);
     }
 
-    public Object getProduct(long id, String category) {
-        switch(category) {
+    public Object getProduct(long id, String type) {
+        switch(type) {
             case "phones" :
             case "tablet" : {
-                return findMobileById(id, category);
+                return findMobileById(id, type);
             }
             case "laptop" : {
-                return findLaptopById(id);
+                return findLaptopById(id, type);
             }
         }
         return null;
     }
 
 
-    private Mobile findMobileById(long id, String category) {
-        return jdbcMobileDao.getMobileById(id, category);
+    private Mobile findMobileById(long id, String type) {
+        return (Mobile) jdbcMobileDao.getProductByIdAndType(id, type);
     }
 
-    private Laptop findLaptopById(long id) {
-        return null;
+    private Laptop findLaptopById(long id, String type) {
+        return (Laptop) jdbcLaptopDao.getProductByIdAndType(id, type);
     }
 }
