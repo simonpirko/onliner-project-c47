@@ -42,7 +42,7 @@ public class UsersServlet extends HttpServlet {
 
         users = adminService.performOperation(operation, user, users, userNumber);
 
-        req.getSession().setAttribute("userList", users);
+        req.setAttribute("userList", users);
 
         getServletContext().getRequestDispatcher(ConstantPath.ADMIN_USERS_JSP).forward(req, resp);
     }
