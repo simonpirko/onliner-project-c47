@@ -35,11 +35,10 @@ public class JdbcMobileDao implements CategoryProductDao {
     }
 
     @Override
-    public Mobile getProductByIdAndType(long id, String type) {
+    public Mobile getProductByIdAndType(long id) {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(LaptopQueryConstant.ADD_LAPTOP_QUERY)) {
             preparedStatement.setInt(1, (int) id);
-            preparedStatement.setString(2, type);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getMobile(resultSet);
