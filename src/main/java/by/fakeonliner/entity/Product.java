@@ -13,13 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 public
- abstract class Product {
+abstract class Product {
     private long id;
     private String brand;
     private BigDecimal price;
     private String model;
     private int marketLaunchDate;
     private double averageRating;
+    private String category;
+    private String image;
+
 
     private List<Comment> comments;
     private List<Shop> shops;

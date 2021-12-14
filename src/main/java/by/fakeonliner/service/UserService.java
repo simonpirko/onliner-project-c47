@@ -6,7 +6,7 @@ import by.fakeonliner.repository.jdbc.JdbcUserDao;
 import java.util.List;
 
 public class UserService {
-    private final JdbcUserDao jdbcUserDao =new JdbcUserDao();
+    private final JdbcUserDao jdbcUserDao = new JdbcUserDao();
     private static UserService instance;
 
     private UserService(){};

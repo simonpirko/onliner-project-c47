@@ -22,7 +22,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         userService = UserService.getInstance();
-        adminService = new AdminService();
+        adminService = AdminService.getInstance();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UsersServlet extends HttpServlet {
         List<User> users = (List<User>) req.getAttribute("userList");
         User user = users.get(Integer.parseInt(userNumber));
 
-        users = adminService.performOperation(operation, user, users, userNumber);
+        users = adminService.performUsersOperation(operation, user, users, userNumber);
 
         req.setAttribute("userList", users);
 

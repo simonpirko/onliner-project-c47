@@ -23,6 +23,6 @@ public interface ProductDao {
 
     void delete(long id);
 
-
+    List<ProductDto> getProductDtoList();
 
 }

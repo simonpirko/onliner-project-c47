@@ -17,6 +17,7 @@ public class JdbcProductDao implements ProductDao {
     private final static String MARKET_LAUNCH_DATE = "market_launch_date";
     private final static String RATING = "rating";
     private final static String CATEGORY = "category";
+    private final static String IMAGE = "product_link_image";
 
     @Override
     public void save(Object object) {
@@ -66,9 +67,19 @@ public class JdbcProductDao implements ProductDao {
         }
     }
 
+    public List<ProductDto> getProductDtoList() {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.GET_PRODUCT_LIST_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public List<ProductDto> findByBrand(String name, String category) {
-
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_BRAND)) {
             preparedStatement.setString(1, name);
@@ -119,6 +130,8 @@ public class JdbcProductDao implements ProductDao {
             productDto.setModel(resultSet.getString(MODEL));
             productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
             productDto.setAverageRating(resultSet.getDouble(RATING));
+            productDto.setCategory(resultSet.getString(CATEGORY));
+            productDto.setImage(resultSet.getString(IMAGE));
             list.add(productDto);
         }
         return list;

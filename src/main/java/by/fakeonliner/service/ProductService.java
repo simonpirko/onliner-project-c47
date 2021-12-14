@@ -49,6 +49,10 @@ public class ProductService {
         return jdbcProductDao.findByAllFromCategory(category);
     }
 
+    public List<ProductDto> getProductDtoList() {
+        return jdbcProductDao.getProductDtoList();
+    }
+
     public Object getProduct(long id, String type) {
         switch(type) {
             case "phones" :

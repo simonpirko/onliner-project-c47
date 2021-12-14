@@ -1,5 +1,6 @@
 package by.fakeonliner.service;
 
+import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.entity.User;
 import by.fakeonliner.repository.inMemory.InMemoryUserDao;
 import by.fakeonliner.repository.UserDao;
@@ -9,7 +10,18 @@ import java.util.List;
 public class AdminService {
     private final UserDao userDao = new InMemoryUserDao();
 
-    public List<User> performOperation(String operation, User user, List<User> users, String userNumber) {
+    private static AdminService instance;
+
+    private AdminService(){};
+
+    public static synchronized AdminService getInstance() {
+        if(instance == null){
+            instance = new AdminService();
+        }
+        return instance;
+    }
+
+    public List<User> performUsersOperation(String operation, User user, List<User> users, String userNumber) {
         switch(operation) {
             case "addAdmin" : {
                 if (!user.getStatus().equals("admin")) {
@@ -37,6 +49,18 @@ public class AdminService {
         return null;
     }
 
+    public List<ProductDto> performProductOperation(String operation, ProductDto productDto,
+                                              List<ProductDto> products, String productNumber) {
+        switch(operation) {
+            case "deleteProduct" : {
+                deleteProduct(productDto);
+                products.remove(productDto);
+                return products;
+            }
+        }
+        return null;
+    }
+
 
     private User addAdminStatus(User user) {
         user.setStatus("admin");
@@ -52,5 +76,9 @@ public class AdminService {
 
     private void deleteUser(User user) {
 //        userDao.delete(user.getId());
+    }
+
+    private void deleteProduct(ProductDto productDto) {
+
     }
 }

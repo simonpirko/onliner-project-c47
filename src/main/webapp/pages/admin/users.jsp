@@ -35,19 +35,19 @@
             <th scope="col">User</th>
         </tr>
         </thead>
-        <c:if test="${sessionScope.userList != null}">
+        <c:if test="${userList != null}">
             <form action="/admin/users" method="post">
                 <c:forEach begin="0" end="${fn:length(userList) - 1}" var="index">
                     <tbody>
                     <label><input type="text" name="userNumber" hidden value="${index}"></label>
                     <tr>
                         <th scope="row">${index + 1}</th>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                        <td>${user.username}</td>
-                        <td>${user.phoneNumber}</td>
-                        <td>${user.email}</td>
-                        <td>${user.status}</td>
+                        <td>${userList.get(index).firstName}</td>
+                        <td>${userList.get(index).lastName}</td>
+                        <td>${userList.get(index).username}</td>
+                        <td>${userList.get(index).phoneNumber}</td>
+                        <td>${userList.get(index).email}</td>
+                        <td>${userList.get(index).status}</td>
                         <td>
                             <button type="submit" name="userOperation" class="btn btn-warning" value="addAdmin">Add
                             </button>
