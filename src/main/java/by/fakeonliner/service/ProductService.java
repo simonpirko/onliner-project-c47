@@ -9,7 +9,7 @@ public class ProductService {
     private final JdbcProductDao jdbcProductDao =new JdbcProductDao();
     private static ProductService instance;
 
-    private ProductService(){};
+    public ProductService(){};
 
     public static synchronized ProductService getInstance() {
         if(instance == null){

@@ -34,4 +34,11 @@ class JdbcProductDaoTest {
         JdbcProductDao jdbcProductDao = new JdbcProductDao();
         boolean result = jdbcProductDao.existByModel("iPhone");
     }
+
+    @Test
+    void findByAllFromCategory() {
+        JdbcProductDao jdbcProductDao = new JdbcProductDao();
+        List<ProductDto> list = jdbcProductDao.findByAllFromCategory("mobile");
+        System.out.println(list);
+    }
 }

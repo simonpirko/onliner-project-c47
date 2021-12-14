@@ -16,43 +16,48 @@
 <div class="container-fluid">
     <div class="col-sm-12 pt-1">
         <div class="row">
+            <c:forEach var="mobile" items="${requestScope.productList}">
             <div class="container-fluid">
                 <h1>Mobile phones</h1>
+                <p>${mobile.model}</p>
             </div>
+            </c:forEach>
         </div>
         <div class="row pt-3">
             <div class="col-sm-2">
                 Фильтр
             </div>
-            <div class="col-sm-7">
-                <div class="row" style="min-height: 150px;">
-                    <div class="col col-lg-3">
-                        <img src="https://content2.onliner.by/catalog/device/header/b7e24b47812f00aba80cc0bbe3e3e2eb.jpeg"
-                             class="rounded" alt="...">
-                    </div>
-                    <div class="col col-lg-9">
-                        <p>15.6" 1920 x 1080 IPS, 60 Гц, несенсорный, Intel Core i5 1135G7 2400 МГц, 16 ГБ, SSD 512 ГБ,
-                            видеокарта встроенная, Windows 10, цвет крышки серый</p>
-                        <div>
-                            <h5 class="card-title">от 2999р.</h5>
-<%--                            <button type="button" class="btn btn-primary btn-sm">Все предложения</button>--%>
+
+<%--                <c:forEach var="mobile" items="${sessionScope.productList}">--%>
+<%--                    <p>${mobile.model}</p>--%>
+                <div class="col-sm-7">
+                    <div class="row" style="min-height: 150px;">
+                        <div class="col col-lg-3">
+                            <img src="${mobile.linkPhoto}"
+                                 class="rounded" alt="...">
+                        </div>
+                        <div class="col col-lg-9">
+                            <p>Model</p>
+                            <div>
+                                <h5 class="card-title">от 2999р.</h5>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3 m-auto">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h5 class="card-title">от 2999р.</h5>
-<%--                        <button type="button" class="btn btn-primary btn-sm">Купить</button>--%>
+                <div class="col-sm-3 m-auto">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h5 class="card-title">от 2999р.</h5>
+                        </div>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn btn-primary btn-sm">35 предложений</button>
+                        </div>
                     </div>
-                    <div class="col-sm-8">
-                        <button type="button" class="btn btn-primary btn-sm">35 предложений</button>
-<%--                        <h5>35 предложений</h5></span>--%>
-                    </div>
-                </div>
 
-            </div>
+                </div>
+<%--                </c:forEach>--%>
+
         </div>
     </div>
 </div>
