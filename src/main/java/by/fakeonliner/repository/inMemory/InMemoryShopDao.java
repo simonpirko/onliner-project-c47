@@ -1,6 +1,7 @@
-package by.fakeonliner.repository;
+package by.fakeonliner.repository.inMemory;
 
 import by.fakeonliner.entity.Shop;
+import by.fakeonliner.repository.ShopDao;
 
 import java.util.ArrayList;
 import java.util.List;

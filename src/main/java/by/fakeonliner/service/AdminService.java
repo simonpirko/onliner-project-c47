@@ -1,7 +1,7 @@
 package by.fakeonliner.service;
 
 import by.fakeonliner.entity.User;
-import by.fakeonliner.repository.InMemoryUserDao;
+import by.fakeonliner.repository.inMemory.InMemoryUserDao;
 import by.fakeonliner.repository.UserDao;
 
 import java.util.List;

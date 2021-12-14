@@ -1,9 +1,6 @@
 package by.fakeonliner.service;
 
 import by.fakeonliner.entity.User;
-import by.fakeonliner.repository.UserDao;
-import by.fakeonliner.repository.InMemoryUserDao;
-import by.fakeonliner.repository.jdbc.JdbcProductDao;
 import by.fakeonliner.repository.jdbc.JdbcUserDao;
 
 import java.util.List;

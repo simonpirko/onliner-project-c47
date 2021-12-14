@@ -2,7 +2,7 @@ package by.fakeonliner.service;
 
 import by.fakeonliner.entity.Shop;
 import by.fakeonliner.repository.ShopDao;
-import by.fakeonliner.repository.InMemoryShopDao;
+import by.fakeonliner.repository.inMemory.InMemoryShopDao;
 
 import java.util.List;
 

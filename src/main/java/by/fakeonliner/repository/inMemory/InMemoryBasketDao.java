@@ -1,6 +1,7 @@
-package by.fakeonliner.repository;
+package by.fakeonliner.repository.inMemory;
 
 import by.fakeonliner.entity.Product;
+import by.fakeonliner.repository.BasketDao;
 
 import java.util.ArrayList;
 import java.util.List;
