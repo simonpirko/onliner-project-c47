@@ -3,6 +3,7 @@ package by.fakeonliner.repository.jdbc;
 import by.fakeonliner.entity.Mobile;
 import by.fakeonliner.repository.CategoryProductDao;
 import by.fakeonliner.repository.configuration.JdbcConnection;
+import by.fakeonliner.repository.query_constant.LaptopQueryConstant;
 import by.fakeonliner.repository.query_constant.MobileQueryConstant;
 
 import java.sql.Connection;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 public class JdbcMobileDao implements CategoryProductDao {
 
     @Override
-    public boolean save(Mobile mobile) {
+    public boolean save(Object object) {
+        Mobile mobile = (Mobile) object;
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(MobileQueryConstant.ADD_MOBILE_QUERY)) {
             preparedStatement.setInt(1, (int) mobile.getId());
@@ -33,11 +35,11 @@ public class JdbcMobileDao implements CategoryProductDao {
     }
 
     @Override
-    public Mobile getMobileById(long id, String category) {
+    public Mobile getProductByIdAndType(long id, String type) {
         try (Connection con = JdbcConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(MobileQueryConstant.GET_MOBILE_BY_ID_QUERY)) {
+             PreparedStatement preparedStatement = con.prepareStatement(LaptopQueryConstant.ADD_LAPTOP_QUERY)) {
             preparedStatement.setInt(1, (int) id);
-            preparedStatement.setString(2, category);
+            preparedStatement.setString(2, type);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getMobile(resultSet);
