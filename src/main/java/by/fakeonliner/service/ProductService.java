@@ -3,6 +3,7 @@ package by.fakeonliner.service;
 import by.fakeonliner.dto.ProductDto;
 import by.fakeonliner.entity.Laptop;
 import by.fakeonliner.entity.Mobile;
+import by.fakeonliner.repository.CategoryProductDao;
 import by.fakeonliner.repository.jdbc.JdbcMobileDao;
 import by.fakeonliner.repository.jdbc.JdbcProductDao;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ProductService {
     private final JdbcProductDao jdbcProductDao = new JdbcProductDao();
-    private final JdbcMobileDao jdbcMobileDao = new JdbcMobileDao();
+    private final CategoryProductDao jdbcMobileDao = new JdbcMobileDao();
     private static ProductService instance;
 
     private ProductService(){};
