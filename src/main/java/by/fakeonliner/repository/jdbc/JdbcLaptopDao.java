@@ -37,9 +37,9 @@ public class JdbcLaptopDao implements CategoryProductDao {
     }
 
     @Override
-    public Laptop getProductByIdAndType(long id, String category) {
+    public Laptop getProductByIdAndType(long id) {
         try (Connection con = JdbcConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(MobileQueryConstant.GET_MOBILE_BY_ID_QUERY)) {
+             PreparedStatement preparedStatement = con.prepareStatement(LaptopQueryConstant.GET_LAPTOP_BY_ID_QUERY)) {
             preparedStatement.setInt(1, (int) id);
             ResultSet resultSet = preparedStatement.executeQuery();
 

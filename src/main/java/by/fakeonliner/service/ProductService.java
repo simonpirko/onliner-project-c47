@@ -49,25 +49,24 @@ public class ProductService {
         return jdbcProductDao.findByAllFromCategory(category);
     }
 
-    public Object getProduct(long id, String type) {
-        switch(type) {
-            case "phones" :
-            case "tablet" : {
-                return findMobileById(id, type);
+    public Object getProduct(long id, String category) {
+        switch(category) {
+            case "mobile" : {
+                return findMobileById(id);
             }
             case "laptop" : {
-                return findLaptopById(id, type);
+                return findLaptopById(id);
             }
         }
         return null;
     }
 
 
-    private Mobile findMobileById(long id, String type) {
-        return (Mobile) jdbcMobileDao.getProductByIdAndType(id, type);
+    private Mobile findMobileById(long id) {
+        return (Mobile) jdbcMobileDao.getProductByIdAndType(id);
     }
 
-    private Laptop findLaptopById(long id, String type) {
-        return (Laptop) jdbcLaptopDao.getProductByIdAndType(id, type);
+    private Laptop findLaptopById(long id) {
+        return (Laptop) jdbcLaptopDao.getProductByIdAndType(id);
     }
 }
