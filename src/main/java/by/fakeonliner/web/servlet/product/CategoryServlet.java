@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/product/mobile")
-public class LaptopCategoryServlet extends HttpServlet {
+@WebServlet("/product/category")
+public class CategoryServlet extends HttpServlet {
     private final static String CATEGORY = "mobile";
 
     private ProductService productService;

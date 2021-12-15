@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/product")
+@WebServlet("/pages/product")
 public class ProductServlet extends HttpServlet {
 
     @Override
