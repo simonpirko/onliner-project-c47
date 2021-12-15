@@ -32,9 +32,6 @@
                 <h6 class="mb-0">Shopping cart</h6>
                 <c:if test="${sessionScope.basketList != null}">
                     <c:if test="${fn:length(sessionScope.basketList) != 0}">
-                        <div class="d-flex justify-content-between">
-                            <span>You have ${fn:length(sessionScope.basketList)} items in your cart</span>
-                        </div>
                         <c:forEach begin="0" end="${fn:length(sessionScope.basketList) - 1}" var="index">
                             <form action="/deleteItem" method="post" style="margin-top: 5px">
                                 <label><input type="text" name="productBasketNumber" hidden value="${index}"></label>
@@ -42,7 +39,7 @@
                                     <div class="d-flex flex-row">
                                         <img class="rounded"
                                              src="${sessionScope.basketList.get(index).image}" width="40">
-                                        <div class="ml-2">
+                                        <div class="ml-2" style="margin-left: 10px">
                                             <span class="font-weight-bold d-block">${sessionScope.basketList.get(index).brand}</span>
                                             <span class="spec">${sessionScope.basketList.get(index).model}</span>
                                         </div>
