@@ -72,6 +72,7 @@
                     </h5><br>
                     <p>${product.description}</p>
                     <br><br>
+                    <a href="product?id=${product.id}">detail</a>
                 </div>
                 <div class="col-4 col-sm-2 align-items-center align-content-center border-left mt-1">
                     <div class="d-flex flex-row align-items-center">

@@ -26,6 +26,19 @@ public class JdbcProductDao implements ProductDao {
     }
 
     @Override
+    public ProductDto findById(int id) {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDto(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public boolean existByModel(String model) {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_MODEL)) {
@@ -126,5 +139,21 @@ public class JdbcProductDao implements ProductDao {
             list.add(productDto);
         }
         return list;
+    }
+
+    private ProductDto getProductDto(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(resultSet.getInt(ID));
+            productDto.setBrand(resultSet.getString(BRAND));
+            productDto.setPrice(resultSet.getInt(PRICE));
+            productDto.setModel(resultSet.getString(MODEL));
+            productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+            productDto.setAverageRating(resultSet.getDouble(RATING));
+            productDto.setLinkPhoto(resultSet.getString(LINK_PHOTO));
+            productDto.setDescription(resultSet.getString(DESCRIPTION));
+            return productDto;
+        }
+        return null;
     }
 }
