@@ -30,8 +30,12 @@ public class BasketService {
     }
 
     public void addProductDb(long id, long productId) {
-//        if ()
-//        jdbcBasketDao.addProductDb(id, productId);
+        int amount = jdbcBasketDao.getProductAmount(productId, id);
+        if (amount > 0) {
+            jdbcBasketDao.changeProductAmount(productId, id, ++amount);
+        } else {
+            jdbcBasketDao.addProductDb(id, productId, ++amount);
+        }
     }
 
     public List<BasketProductDto> getProductList() {
@@ -42,12 +46,17 @@ public class BasketService {
         return jdbcBasketDao.getBasketFromDb(id);
     }
 
-    public void deleteProductFromBd(long productId) {
-        jdbcBasketDao.deleteProduct(productId);
+    public void deleteProductFromBd(long productId, long userId) {
+        int amount = jdbcBasketDao.getProductAmount(productId, userId);
+        if (amount > 1) {
+            jdbcBasketDao.changeProductAmount(productId, userId, --amount);
+        } else {
+            jdbcBasketDao.deleteProduct(productId, userId);
+        }
     }
 
     public void deleteProductFromMemory(long productId) {
-        inMemoryBasketDao.deleteProduct(productId);
+        inMemoryBasketDao.deleteProduct(productId, 1);
     }
 
     private void setFieldsBasket(ProductDto product, BasketProductDto basketProductDto) {

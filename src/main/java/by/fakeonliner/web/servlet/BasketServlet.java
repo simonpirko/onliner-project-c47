@@ -30,18 +30,12 @@ public class BasketServlet extends HttpServlet {
         if (req.getSession().getAttribute("guest") == null) {
             User user = (User) req.getSession().getAttribute("user");
             List<BasketProductDto> productsDb = basketService.getProductListFromDb(user.getId());
-            if (req.getSession().getAttribute("basketList") != null) {
-                List<BasketProductDto> guestList = (List<BasketProductDto>) req.getSession().getAttribute("basketList");
-                productsDb = getFinishedList(guestList, productsDb);
-            }
             double totalCost = getTotalCost(productsDb);
-            req.setAttribute("totalCost", totalCost);
-            req.getSession().setAttribute("basketList", productsDb);
+            setAttribute(req, totalCost, productsDb);
         } else {
             List<BasketProductDto> products = basketService.getProductList();
             double totalCost = getTotalCost(products);
-            req.setAttribute("totalCost", totalCost);
-            req.getSession().setAttribute("basketList", products);
+            setAttribute(req, totalCost, products);
         }
         getServletContext().getRequestDispatcher(ConstantPath.BASKET_JSP).forward(req, resp);
     }
@@ -69,5 +63,10 @@ public class BasketServlet extends HttpServlet {
             guestList.add(product);
         }
         return guestList;
+    }
+
+    private void setAttribute(HttpServletRequest req, double totalCost, List<BasketProductDto> products) {
+        req.setAttribute("totalCost", totalCost);
+        req.getSession().setAttribute("basketList", products);
     }
 }

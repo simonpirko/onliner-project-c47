@@ -23,12 +23,7 @@ public class InMemoryBasketDao implements BasketDao {
     }
 
     @Override
-    public boolean addProductDb(long id, int productId) {
-        return false;
-    }
-
-    @Override
-    public void deleteProduct(long productId) {
+    public void deleteProduct(long productId, long userId) {
         List<BasketProductDto> list = new ArrayList<>();
         for(BasketProductDto item : basket) {
             if (item.getId() == productId) {
@@ -50,5 +45,20 @@ public class InMemoryBasketDao implements BasketDao {
     @Override
     public List<BasketProductDto> getBasketFromDb(long userId) {
         return null;
+    }
+
+    @Override
+    public int getProductAmount(long productId, long userId) {
+        return 0;
+    }
+
+    @Override
+    public void changeProductAmount(long productId, long userId, int amount) {
+
+    }
+
+    @Override
+    public boolean addProductDb(long id, long productId, int amount) {
+        return false;
     }
 }

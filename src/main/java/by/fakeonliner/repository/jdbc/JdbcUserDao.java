@@ -27,10 +27,9 @@ public class JdbcUserDao implements UserDao {
     @Override
     public boolean existByEmail(String email) {
         try (Connection con = JdbcConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.CHANGE_USERNAME_QUERY)) {
+             PreparedStatement preparedStatement = con.prepareStatement(UserQueryConstant.EXIST_BY_EMAIL_QUERY)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             return resultSet.next();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

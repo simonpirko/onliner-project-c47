@@ -46,10 +46,8 @@ public class HomeServlet extends HttpServlet {
         if(req.getSession().getAttribute("guest") == null) {
             User user = (User) req.getSession().getAttribute("user");
             basketService.addProductDb(user.getId(), product.getId());
-            req.setAttribute("success", "Success");
         } else {
             basketService.addProduct(product);
-            req.setAttribute("success", "Success");
         }
 
         getServletContext().getRequestDispatcher(ConstantPath.HOME_JSP).forward(req, resp);
