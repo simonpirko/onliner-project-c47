@@ -66,13 +66,13 @@
                     </div>
                 </div>
                 <div class="col-8 col-sm-8">
-                    <h2>${product.model}</h2>
+                    <a href="product?id=${product.id}"><h2>${product.model}</h2></a>
                     <h5><span class="glyphicon glyphicon-time"></span> ${product.marketLaunchDate}</h5>
                     <h5><span class="label label-danger">${product.brand}</span> <span class="label label-primary">Rating: ${product.averageRating}</span>
                     </h5><br>
                     <p>${product.description}</p>
                     <br><br>
-                    <a href="product?id=${product.id}">detail</a>
+
                 </div>
                 <div class="col-4 col-sm-2 align-items-center align-content-center border-left mt-1">
                     <div class="d-flex flex-row align-items-center">
@@ -83,7 +83,9 @@
                     </div>
                 </div>
             </div>
+                <hr>
             </c:forEach>
+
         </div>
     </div>
 </div>
