@@ -17,4 +17,6 @@ public class ProductDto {
     private String model;
     private int marketLaunchDate;
     private double averageRating;
+    private String description;
+    private String image;
 }
