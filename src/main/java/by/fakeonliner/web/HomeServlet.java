@@ -24,5 +24,14 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<ProductDto> homeProductList = productService.getProductListHome();
+        req.getSession().setAttribute("homeProductList", homeProductList);
+        getServletContext().getRequestDispatcher(ConstantPath.HOME_JSP).forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String productNumber = req.getParameter("productNumber");
+        List<ProductDto> products = (List<ProductDto>) req.getSession().getAttribute("homeProductList");
+
     }
 }

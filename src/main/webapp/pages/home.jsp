@@ -39,14 +39,19 @@
     </div>
 
     <div class="col-10" style="display: flex; flex-wrap: wrap; flex-direction: row; width: 1000px;">
-        <c:forEach begin="0" items="product" end="${fn:length(sessionScope.homeProductList) - 1}" var="index">
+
+        <c:forEach begin="0" end="${fn:length(sessionScope.homeProductList) - 1}" var="index">
             <div class="col-5">
-                <div class="card mb-5" style="margin-right :150px; margin-left: 150px; height: 450px; width: 306px;">
-                    <img class="card-img-top" style="width: 306px; height: 250px;" src= "${product.get(index).image}" alt="Card image cap">
+                <div class="card mb-5"
+                     style="margin-right :150px; margin-left: 150px; height: 450px; width: 306px;">
+                    <img class="card-img-top" style="width: 306px; height: 250px;"
+                         src="${sessionScope.homeProductList.get(index).image}"
+                         alt="Card image cap">
+                    <form action="/" method="post">
                     <div class="card-body">
-                        <h5 class="card-title">${product.get(index).brand} ${product.get(index).model}</h5>
-                        <p class="card-text">${product.get(index).description}</p>
-                        <p class="text">Price: ${product.get(index).price}</p>
+                        <label><input type="text" name="productNumber" hidden value="${index}"></label>
+                        <h5 class="card-title"> ${sessionScope.homeProductList.get(index).model}</h5>
+                        <p class="text">Price: ${sessionScope.homeProductList.get(index).price} p</p>
                         <a href="#" class="btn btn-outline-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-cart2" viewBox="0 0 16 16">
@@ -61,6 +66,8 @@
                             </svg>
                             View Product</a>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </c:forEach>

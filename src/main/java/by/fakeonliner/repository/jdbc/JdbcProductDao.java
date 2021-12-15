@@ -130,6 +130,8 @@ public class JdbcProductDao implements ProductDao {
             productDto.setModel(resultSet.getString(MODEL));
             productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
             productDto.setAverageRating(resultSet.getDouble(RATING));
+            productDto.setImage(resultSet.getString("product_link_image"));
+            productDto.setDescription(resultSet.getString("description"));
             list.add(productDto);
         }
         return list;
