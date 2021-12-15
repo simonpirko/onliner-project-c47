@@ -28,16 +28,16 @@ public class BasketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("guest") == null) {
-            if (req.getSession().getAttribute("basketList") != null) {
-                List<BasketProductDto> guestList = (List<BasketProductDto>) req.getSession().getAttribute("basketList");
-            }
             User user = (User) req.getSession().getAttribute("user");
             List<BasketProductDto> productsDb = basketService.getProductListFromDb(user.getId());
+            if (req.getSession().getAttribute("basketList") != null) {
+                List<BasketProductDto> guestList = (List<BasketProductDto>) req.getSession().getAttribute("basketList");
+                productsDb = getFinishedList(guestList, productsDb);
+            }
             double totalCost = getTotalCost(productsDb);
             req.setAttribute("totalCost", totalCost);
             req.getSession().setAttribute("basketList", productsDb);
         } else {
-
             List<BasketProductDto> products = basketService.getProductList();
             double totalCost = getTotalCost(products);
             req.setAttribute("totalCost", totalCost);
@@ -62,5 +62,12 @@ public class BasketServlet extends HttpServlet {
             }
         }
         return amount;
+    }
+
+    private List<BasketProductDto> getFinishedList(List<BasketProductDto> guestList, List<BasketProductDto> productsDb) {
+        for (BasketProductDto product : productsDb) {
+            guestList.add(product);
+        }
+        return guestList;
     }
 }
