@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/pages/home.jsp">FakeOnliner</a>
+        <a class="navbar-brand" href="/pages/home">FakeOnliner</a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <c:if test="${sessionScope.user == null}">
                 <form class="d-flex m-2" action="/search" method="post">

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(value = "/product/mobile")
+@WebServlet("/product/mobile")
 public class LaptopCategoryServlet extends HttpServlet {
     private final static String CATEGORY = "mobile";
 
@@ -22,7 +22,6 @@ public class LaptopCategoryServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         productService = ProductService.getInstance();
-        System.out.println(productService);
     }
 
     @Override
