@@ -109,6 +109,17 @@ public class JdbcProductDao implements ProductDao {
         return null;
     }
 
+    public List<ProductDto> getProductListHome() {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.GET_ALL_PRODUCTS_HOME_QUERY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDtoList(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private List<ProductDto> getProductDtoList(ResultSet resultSet) throws SQLException {
         List<ProductDto> list = new ArrayList<>();
         while (resultSet.next()) {

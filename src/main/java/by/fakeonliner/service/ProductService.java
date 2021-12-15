@@ -61,6 +61,9 @@ public class ProductService {
         return null;
     }
 
+    public List<ProductDto> getProductListHome() {
+        return jdbcProductDao.getProductListHome();
+    }
 
     private Mobile findMobileById(long id) {
         return (Mobile) jdbcMobileDao.getProductByIdAndType(id);
