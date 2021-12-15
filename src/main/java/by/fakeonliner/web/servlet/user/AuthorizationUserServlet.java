@@ -44,6 +44,7 @@ public class AuthorizationUserServlet extends HttpServlet {
                 List<User> users = userService.getAllUsers();
                 req.getSession().setAttribute("user", user);
                 req.getSession().setAttribute("users", users);
+                req.getSession().setAttribute("guest", null);
                 resp.sendRedirect("/");
                 return;
             } else {

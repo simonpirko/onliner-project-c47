@@ -1,6 +1,9 @@
 package by.fakeonliner.web;
 
+import by.fakeonliner.dto.BasketProductDto;
 import by.fakeonliner.dto.ProductDto;
+import by.fakeonliner.entity.User;
+import by.fakeonliner.service.BasketService;
 import by.fakeonliner.service.ProductService;
 import by.fakeonliner.service.UserService;
 import by.fakeonliner.web.constant.ConstantPath;
@@ -16,15 +19,20 @@ import java.util.List;
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
     private ProductService productService;
+    private BasketService basketService;
 
     @Override
     public void init() throws ServletException {
         productService = ProductService.getInstance();
+        basketService = BasketService.getInstance();
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<ProductDto> homeProductList = productService.getProductListHome();
         req.getSession().setAttribute("homeProductList", homeProductList);
+        if (req.getSession().getAttribute("user") == null) {
+            req.getSession().setAttribute("guest", 1);
+        }
         getServletContext().getRequestDispatcher(ConstantPath.HOME_JSP).forward(req, resp);
     }
 
@@ -33,5 +41,17 @@ public class HomeServlet extends HttpServlet {
         String productNumber = req.getParameter("productNumber");
         List<ProductDto> products = (List<ProductDto>) req.getSession().getAttribute("homeProductList");
 
+        ProductDto product = products.get(Integer.parseInt(productNumber));
+
+        if(req.getSession().getAttribute("guest") == null) {
+            User user = (User) req.getSession().getAttribute("user");
+            basketService.addProductDb(user.getId(), product.getId());
+            req.setAttribute("success", "Success");
+        } else {
+            basketService.addProduct(product);
+            req.setAttribute("success", "Success");
+        }
+
+        getServletContext().getRequestDispatcher(ConstantPath.HOME_JSP).forward(req, resp);
     }
 }
