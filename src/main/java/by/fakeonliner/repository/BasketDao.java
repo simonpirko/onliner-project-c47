@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BasketDao {
 
-    boolean addProduct(BasketProductDto product);
+    void addProduct(BasketProductDto product);
 
     boolean addProductDb(long id, int productId);
 

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class JdbcBasketDao implements BasketDao {
     @Override
-    public boolean addProduct(BasketProductDto product) {
-        return false;
+    public void addProduct(BasketProductDto product) {
+
     }
 
     @Override

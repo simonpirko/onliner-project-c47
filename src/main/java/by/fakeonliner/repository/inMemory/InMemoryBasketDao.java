@@ -4,21 +4,22 @@ import by.fakeonliner.dto.BasketProductDto;
 import by.fakeonliner.repository.BasketDao;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryBasketDao implements BasketDao {
-    private static List<BasketProductDto> basket = new ArrayList<>();
+    private static LinkedList<BasketProductDto> basket = new LinkedList<>();
 
     @Override
-    public boolean addProduct(BasketProductDto product) {
+    public void addProduct(BasketProductDto product) {
         for (int i = 0; i < basket.size(); i++) {
             if (basket.get(i).getModel().equals(product.getModel())) {
                 int amount = basket.get(i).getAmount() + 1;
                 basket.get(i).setAmount(amount);
-                return true;
+                return;
             }
         }
-        return basket.add(product);
+        basket.addFirst(product);
     }
 
     @Override

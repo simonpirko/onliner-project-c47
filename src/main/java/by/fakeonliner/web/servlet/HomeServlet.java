@@ -1,4 +1,4 @@
-package by.fakeonliner.web;
+package by.fakeonliner.web.servlet;
 
 import by.fakeonliner.dto.BasketProductDto;
 import by.fakeonliner.dto.ProductDto;
