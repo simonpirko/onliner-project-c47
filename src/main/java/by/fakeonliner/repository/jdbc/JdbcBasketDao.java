@@ -7,13 +7,13 @@ import java.util.List;
 
 public class JdbcBasketDao implements BasketDao {
     @Override
-    public void addProduct(BasketProductDto product) {
-
+    public boolean addProductDb(long id, int productId) {
+        return false;
     }
 
     @Override
-    public boolean addProductDb(long id, int productId) {
-        return false;
+    public List<BasketProductDto> getBasketFromDb(long userId) {
+        return null;
     }
 
     @Override
@@ -26,8 +26,9 @@ public class JdbcBasketDao implements BasketDao {
         return null;
     }
 
+
     @Override
-    public List<BasketProductDto> getBasketFromDb(long userId) {
-        return null;
+    public void addProduct(BasketProductDto product) {
+
     }
 }
