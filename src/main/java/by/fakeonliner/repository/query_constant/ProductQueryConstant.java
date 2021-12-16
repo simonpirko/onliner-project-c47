@@ -7,4 +7,5 @@ public class ProductQueryConstant {
     public static final String DELETE_PRODUCT_BY_ID = "DELETE FROM product_list WHERE id=?";
     public static final String ALL_FROM_CATEGORY = "SELECT * FROM product_list WHERE category=?";
     public static final String GET_ALL_PRODUCTS_HOME_QUERY = "SELECT * FROM product_list";
+    public final static String FIND_BY_ID = "SELECT * FROM product_list WHERE id=?";
 }

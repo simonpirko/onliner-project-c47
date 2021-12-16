@@ -19,14 +19,14 @@
             <div class="col col-sm-8">
                 <div class="row style=" style="min-height: 250px;">
                     <div class="col col-lg-4">
-                        <img src="https://content2.onliner.by/catalog/device/header/b7e24b47812f00aba80cc0bbe3e3e2eb.jpeg"
-                             class="rounded" alt="...">
+                        <img class="rounded mx-auto d-block" style="max-width: 100px;max-height: 130px"
+                             src="${product.image}">
                     </div>
                     <div class="col col-lg-8">
-                        <p>15.6" 1920 x 1080 IPS, 60 Гц, несенсорный, Intel Core i5 1135G7 2400 МГц, 16 ГБ, SSD 512 ГБ,
-                            видеокарта встроенная, Windows 10, цвет крышки серый</p>
+                        <h5>${product.model}</h5>
+                        <p>${product.description}</p>
                         <div>
-                            <h5 class="card-title">2999р.</h5>
+                            <h6 class="card-title">от ${product.price}</h6>
                             <button type="button" class="btn btn-primary btn-sm">Все предложения</button>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
             <div class="col-sm-2">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h5 class="card-title">2999р.</h5>
+                        <h6 class="card-title">от ${product.price}</h6>
                         <button type="button" class="btn btn-primary btn-sm">Купить</button>
                     </div>
                     <div class="col-sm-6 m-auto">

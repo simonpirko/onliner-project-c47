@@ -18,45 +18,46 @@
 <body>
 <jsp:include page="/pages/_header.jsp"/>
 
-<div class="row m-4">
+<div class="conteiner">
+    <div class="row m-4">
 
-    <div class="col-2 ">
-        <h4 style="margin-left: 70px">
-            Categories
-        </h4>
-        <div class="card"
-             style="width: 250px; height: 125px;  left: 5px; margin-right: 20px; border-width: 5px; border-radius: 10%">
-            <div class="list-group" id="list-tab" style="margin-top: 20px" role="tablist">
-                <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-success">Mobile</a>
-                    <a href="#" class="btn btn-success">Laptop</a>
+        <div class="col-2 ">
+            <h4 style="margin-left: 70px">
+                Categories
+            </h4>
+            <div class="card"
+                 style="width: 250px; height: 125px;  left: 5px; margin-right: 20px; border-width: 5px; border-radius: 10%">
+                <div class="list-group" id="list-tab" style="margin-top: 20px" role="tablist">
+                    <div class="d-grid gap-2">
+                        <a href="/product/category" class="btn btn-success">Mobile</a>
+                        <a href="#" class="btn btn-success">Laptop</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-10" style="display: flex; flex-wrap: wrap; flex-direction: row; width: 1000px;">
-
-        <c:forEach begin="0" end="${fn:length(sessionScope.homeProductList) - 1}" var="index">
-            <div class="col-5">
-                <div class="card mb-5"
-                     style="margin-right :150px; margin-left: 150px; height: 450px; width: 306px;">
-                    <img class="card-img-top" style="width: 306px; height: 250px;"
-                         src="${sessionScope.homeProductList.get(index).image}"
-                         alt="Card image cap">
-                    <form action="/" method="post">
-                        <div class="card-body">
-                            <label><input type="text" name="productNumber" hidden value="${index}"></label>
-                            <h5 class="card-title"> ${sessionScope.homeProductList.get(index).model}</h5>
-                            <p class="text">Price: ${sessionScope.homeProductList.get(index).price} p</p>
-                            <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-cart2"></i> Buy
-                            </button>
-                            <a href="#" class="btn btn-outline-secondary"><i class="bi bi-eye"></i> View Product</a>
-                        </div>
-                    </form>
+        <div class="col-10" style=" display: flex; flex-wrap: wrap; flex-direction: row; width: 1000px;">
+            <c:forEach begin="0" end="${fn:length(sessionScope.homeProductList) - 1}" var="index">
+                <div class="col-5">
+                    <div class="card mb-5"
+                         style="  justify-content: space-between; margin-right :500px; border-top-left-radius: 15%; border-top-right-radius: 15%;  margin-left: 200px; height: 500px; width: 285px;">
+                        <img class="card-img-top" style="width: 290px; height: 300px;"
+                             src="${sessionScope.homeProductList.get(index).image}"
+                             alt="Card image cap">
+                        <form action="/" method="post">
+                            <div class="card-body">
+                                <label><input type="text" name="productNumber" hidden value="${index}"></label>
+                                <h5 class="card-title"> ${sessionScope.homeProductList.get(index).model}</h5>
+                                <p class="text">Price: ${sessionScope.homeProductList.get(index).price} p</p>
+                                <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-cart2"></i> Buy
+                                </button>
+                                <a href="#" class="btn btn-outline-secondary"><i class="bi bi-eye"></i> View Product</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 </div>
 </body>

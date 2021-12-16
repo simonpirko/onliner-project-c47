@@ -14,5 +14,6 @@ public final class ConstantPath {
     public final static String ADMIN_PRODUCTS_JSP = "/pages/admin/products.jsp";
     public final static String ADMIN_CATEGORIES_JSP = "/pages/admin/categories.jsp";
     public final static String CHANGE_DATA_USER_JSP ="/pages/user/change_data_user.jsp";
-    public final static String PRODUCT_JSP = "/pages/shop/product.jsp";
+    public final static String PRODUCT_JSP = "/pages/product/product.jsp";
+    public final static String CATEGORY_MOBILE_JSP = "/pages/product/category.jsp";
 }

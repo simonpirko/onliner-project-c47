@@ -25,6 +25,10 @@ public class ProductService {
         return instance;
     }
 
+    public ProductDto findById(int id){
+        return jdbcProductDao.findById(id);
+    }
+
     public boolean existByModel(String model){
         return jdbcProductDao.existByModel(model);
     }

@@ -17,10 +17,25 @@ public class JdbcProductDao implements ProductDao {
     private final static String MARKET_LAUNCH_DATE = "market_launch_date";
     private final static String RATING = "rating";
     private final static String CATEGORY = "category";
+    private final static String LINK_PHOTO = "product_link_image";
+    private final static String DESCRIPTION = "description";
 
     @Override
     public void save(Object object) {
 
+    }
+
+    @Override
+    public ProductDto findById(int id) {
+        try (Connection con = JdbcConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(ProductQueryConstant.FIND_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getProductDto(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -130,11 +145,26 @@ public class JdbcProductDao implements ProductDao {
             productDto.setModel(resultSet.getString(MODEL));
             productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
             productDto.setAverageRating(resultSet.getDouble(RATING));
-            productDto.setImage(resultSet.getString("product_link_image"));
-            productDto.setDescription(resultSet.getString("description"));
+            productDto.setImage(resultSet.getString(LINK_PHOTO));
+            productDto.setDescription(resultSet.getString(DESCRIPTION));
             list.add(productDto);
         }
-        resultSet.close();
         return list;
+    }
+
+    private ProductDto getProductDto(ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            ProductDto productDto = new ProductDto();
+            productDto.setId(resultSet.getInt(ID));
+            productDto.setBrand(resultSet.getString(BRAND));
+            productDto.setPrice(resultSet.getInt(PRICE));
+            productDto.setModel(resultSet.getString(MODEL));
+            productDto.setMarketLaunchDate(resultSet.getInt(MARKET_LAUNCH_DATE));
+            productDto.setAverageRating(resultSet.getDouble(RATING));
+            productDto.setImage(resultSet.getString(LINK_PHOTO));
+            productDto.setDescription(resultSet.getString(DESCRIPTION));
+            return productDto;
+        }
+        return null;
     }
 }
