@@ -134,6 +134,7 @@ public class JdbcProductDao implements ProductDao {
             productDto.setDescription(resultSet.getString("description"));
             list.add(productDto);
         }
+        resultSet.close();
         return list;
     }
 }

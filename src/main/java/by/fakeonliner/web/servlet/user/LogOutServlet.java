@@ -15,6 +15,7 @@ public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
-        resp.sendRedirect(ConstantPath.HOME_JSP);
+        req.getSession().setAttribute("guest", 1);
+        resp.sendRedirect("/");
     }
 }

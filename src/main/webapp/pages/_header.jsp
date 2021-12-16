@@ -16,8 +16,8 @@
                     <a class="btn btn-outline-success" href="/shop/authorization" role="button"><i
                             class="bi bi-shop"></i></a>
                 </form>
-                <form class="d-flex m-2" action="/" method="post">
-                    <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
+                <form class="d-flex m-2" action="/basket" method="post">
+                    <a class="btn btn-outline-primary" href="/basket" role="button"><i class="bi bi-basket"></i></a>
                 </form>
                 <form class="d-flex m-2" action="/user/authorization" method="post">
                     <a class="btn btn-outline-info" href="/user/authorization" role="button"><i
@@ -49,7 +49,7 @@
                                 class="bi bi-person-circle"></i></a>
                     </form>
                     <form class="d-flex m-2" action="/search" method="post">
-                        <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-basket"></i></a>
+                        <a class="btn btn-outline-primary" href="/basket" role="button"><i class="bi bi-basket"></i></a>
                     </form>
                     <form class="d-flex m-2" action="/search" method="post">
                         <a class="btn btn-outline-danger" href="/logOut"><i class="bi bi-box-arrow-right"></i></a>
